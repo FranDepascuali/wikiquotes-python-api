@@ -12,7 +12,7 @@ def get_all_quotes(author):
     quotes_ending = __find_quotes_ending__(soup)
 
     if quotes_start is None:
-        print "UPS"
+        print ("UPS")
         return []
 
     probable_quotes = []
@@ -98,7 +98,7 @@ def __find_first__(ids, soup):
             found_tags.append(found.parent)
 
     if found_tags == []:
-        print "Error: Not found"
+        print("Error: Not found")
     elif len(found_tags) == 1:
         return found_tags[0]
     else:

@@ -1,5 +1,5 @@
 import unittest
-import api
+import wikiquotes
 
 class QuoteLengthTest(unittest.TestCase):
 
@@ -19,7 +19,7 @@ class QuoteLengthTest(unittest.TestCase):
         self.__execute__('Aristotle', 153)
 
     def __execute__(self, author, quotes_length):
-        quotes = api.get_all_quotes(author)
+        quotes = wikiquotes.get_all_quotes(author)
         # It is probable that new quotes are added.
         # The assumption is that quotes aren't removed.
         # So quotes fetched must be at least the numbers seen.

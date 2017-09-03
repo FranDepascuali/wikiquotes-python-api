@@ -1,25 +1,28 @@
 # -*- coding: utf-8 -*-
 import unittest
-import api
+import wikiquotes
 
 class QuoteTest(unittest.TestCase):
 
     def test_Reuben_Abel(self):
-        quotes = api.get_all_quotes('Reuben_Abel')
+        print "test_Reuben_Abel"
+        quotes = wikiquotes.get_all_quotes('Reuben_Abel')
         first_quote = quotes[0]
         wiki_quote = "The continuum in which we live is not the kind of place in which middles can be unambiguously excluded."
         self.assertEqual(wiki_quote, first_quote)
 
     def test_Hau_Pei_tsun_(self):
+        print "test_Hau_Pei_tsun_"
         correct_quotes = []
         correct_quotes.append("The slogans of \'countering back the mainland\' created by Chiang Kai-shek and \'liberating Taiwan\' by Mao Zedong several decades ago should be forgotten because none of them could be put into practice.")
         correct_quotes.append("When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.")
         correct_quotes.append("Taiwanese independence is a dead end.")
 
-        quotes = api.get_all_quotes('Hau Pei-tsun')
+        quotes = wikiquotes.get_all_quotes('Hau Pei-tsun')
         self.assertEqual(set(quotes), set(correct_quotes))
 
     def test_Jack_Abbott(self):
+        print "test_Jack_Abbott"
         correct_quotes = []
         correct_quotes.append("Even European philosophers have taken notice that most of what we take for knowledge is nothing but bias and prejudice.")
         correct_quotes.append("The world is amazed at how 'cruel' it is! (This is very funny to think about!) And then, when the 'chips are down' (Sartre's favorite expression), Sartre, who has never gambled but is enamored of the terminology of a kind of daring that doesn't involve getting his ass skinned, 'martyrs' himself. It is the same kind of responsibility anyone takes upon himself by submitting to your bad opinion of him by hanging his head and agreeing with all the accusations - and then, when he has done that, forlornly tells you he is sorry it rained last night, sorry the price of tea went up, etc. etc.")
@@ -30,12 +33,15 @@ class QuoteTest(unittest.TestCase):
         correct_quotes.append("I feel that if I ever did adjust to prison, I could by that alone never adjust to society.")
         correct_quotes.append("This world is nothing. An illusion. Death is the release.")
 
-        quotes = api.get_all_quotes('Jack_Abbott')
+        quotes = wikiquotes.get_all_quotes('Jack_Abbott')
 
         self.assertEqual(set(quotes), set(correct_quotes))
 
 
     def test_Dijkstra(self):
+
+        print "test_Dijkstra"
+
         correct_quotes = []
 
         correct_quotes.append("For a number of years I have been familiar with the observation that the quality of programmers is a decreasing function of the density of go to statements in the programs they produce. More recently I discovered why the use of the go to statement has such disastrous effects, and I became convinced that the go to statement should be abolished from all \"higher level\" programming languages.")
@@ -52,7 +58,7 @@ class QuoteTest(unittest.TestCase):
         incorrect_quotes.append("Computer Science is no more about computers than astronomy is about telescopes.")
         incorrect_quotes.append("Go To statement considered harmful")
 
-        quotes = api.get_all_quotes('Edsger_W._Dijkstra')
+        quotes = wikiquotes.get_all_quotes('Edsger_W._Dijkstra')
 
         self.assertTrue(set(correct_quotes).issubset(set(quotes)))
         self.assertFalse(set(incorrect_quotes).issubset(set(quotes)))

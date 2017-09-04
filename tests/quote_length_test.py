@@ -1,4 +1,5 @@
-import test_context
+import directory
+
 import wikiquotes
 import unittest
 

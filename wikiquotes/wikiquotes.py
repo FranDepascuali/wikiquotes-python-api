@@ -1,11 +1,12 @@
-import managers.APIManager as APIManager
-import managers.HTMLManager as HTMLManager
+import directory
 
-import languages.English as English
+import APIManager
+import HTMLManager
+import english
 
 def get_all_quotes(author):
     quotes_page = APIManager.get_quotes_page(author)
-    webpageManager = HTMLManager.HTMLManager(quotes_page, English)
+    webpageManager = HTMLManager.HTMLManager(quotes_page, english)
 
     quotes_start = webpageManager.start_of_quotes()
     quotes_ending = webpageManager.end_of_quotes()

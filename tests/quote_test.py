@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import test_context
+import directory
+
 import unittest
 import wikiquotes
 

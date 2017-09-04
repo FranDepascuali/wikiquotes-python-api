@@ -39,6 +39,3 @@ def random_quote(author):
 def supported_languages():
     languages = file_manager.list_files_with_extension(directory.languages_directory, ".py")
     return map(lambda language: language.replace(".py", ""), languages)
-
-for lang in supported_languages():
-    print lang

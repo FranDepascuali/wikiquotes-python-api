@@ -8,7 +8,7 @@ def __request__(author, url = 'https://en.wikiquote.org/w/api.php?', action = 'q
     parameters['action'] = action
     parameters['prop'] = prop
     parameters['format'] = format
-    parameters['redirects'] = 'redirects'
+    parameters['redirects'] = True
     parameters['titles'] = author
 
     request = requests.get(url, params = parameters, allow_redirects=True)

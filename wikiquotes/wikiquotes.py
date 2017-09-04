@@ -37,8 +37,6 @@ def get_all_quotes(author, language):
 def random_quote(author, language):
     return random.choice(get_all_quotes(author, language))
 
-print(random_quote("Paulo_Coelho", spanish))
-
 def supported_languages():
     languages = file_manager.list_files_with_extension(directory.languages_directory, ".py")
     return map(lambda language: language.replace(".py", ""), languages)

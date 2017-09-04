@@ -1,18 +1,23 @@
 import requests
 
-def get_quotes_page(author):
-    return __page_from_json__(__request__(author))
+def get_quotes_page(author, language):
+    return __page_from_json__(__request__(author, language.base_url))
 
-def __request__(author, url = 'https://en.wikiquote.org/w/api.php?', action = 'query', prop = 'extracts', format = 'json'):
+def __request__(author, base_url, action = 'query', prop = 'extracts', format = 'json', redirects = True):
     parameters = {}
     parameters['action'] = action
     parameters['prop'] = prop
     parameters['format'] = format
-    parameters['redirects'] = True
+    parameters['redirects'] = redirects
     parameters['titles'] = author
 
-    request = requests.get(url, params = parameters, allow_redirects=True)
-    answer = request.json()
+    request = requests.get(base_url, params = parameters, allow_redirects = redirects)
+
+    if format == "json":
+        answer = request.json()
+    else:
+        # TODO: Correct error handling
+        print("Error: Unsupported format")
 
     return answer
 

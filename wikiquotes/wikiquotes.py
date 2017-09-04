@@ -6,11 +6,11 @@ import os
 import file_manager
 import api_manager
 import html_manager
-import english
+import spanish
 
-def get_all_quotes(author):
-    quotes_page = APIManager.get_quotes_page(author)
-    webpageManager = HTMLManager.HTMLManager(quotes_page, english)
+def get_all_quotes(author, language):
+    quotes_page = api_manager.get_quotes_page(author, language)
+    webpageManager = html_manager.HTMLManager(quotes_page, language)
 
     quotes_start = webpageManager.start_of_quotes()
     quotes_ending = webpageManager.end_of_quotes()
@@ -25,19 +25,19 @@ def get_all_quotes(author):
         if element == quotes_ending:
             break
 
-        if HTMLManager.is_list(element):
+        if html_manager.is_list(element):
             webpageManager.remove_sublists(element)
-            quotes.extend(HTMLManager.extract_all_items_from_list(element))
+            quotes.extend(html_manager.extract_all_items_from_list(element))
 
-        if HTMLManager.is_subheading(element):
+        if html_manager.is_subheading(element):
             webpageManager.remove(element)
 
     return quotes
 
-def random_quote(author):
-    return random.choice(get_all_quotes(author))
+def random_quote(author, language):
+    return random.choice(get_all_quotes(author, language))
 
-print(random_quote("Juan_Román_Riquelme"))
+print(random_quote("Paulo_Coelho", spanish))
 
 def supported_languages():
     languages = file_manager.list_files_with_extension(directory.languages_directory, ".py")

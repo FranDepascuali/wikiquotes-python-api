@@ -12,3 +12,5 @@ visible_subdirectories = filter(__is_visible_directory__, __all_subdirectories__
 
 for subdirectory in visible_subdirectories:
     sys.path.append(subdirectory)
+
+languages_directory = filter(lambda subdirectory: "languages" in subdirectory, visible_subdirectories)[0]

@@ -1,6 +1,8 @@
 import random
 import directory
+import os
 
+import file_manager
 import APIManager
 import HTMLManager
 import english
@@ -35,4 +37,8 @@ def random_quote(author):
     return random.choice(get_all_quotes(author))
 
 def supported_languages():
-    return "English"
+    languages = file_manager.list_files_with_extension(directory.languages_directory, ".py")
+    return map(lambda language: language.replace(".py", ""), languages)
+
+for lang in supported_languages():
+    print lang

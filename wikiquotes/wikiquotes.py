@@ -1,3 +1,4 @@
+import random
 import directory
 
 import APIManager
@@ -29,6 +30,9 @@ def get_all_quotes(author):
             webpageManager.remove(element)
 
     return quotes
+
+def random_quote(author):
+    return random.choice(get_all_quotes(author))
 
 def supported_languages():
     return "English"

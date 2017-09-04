@@ -1,20 +1,10 @@
-# TODO: Make imports cleaner
-import os
-import sys
-Directory = os.path.dirname(os.path.realpath(__file__))
-Managers = os.path.join(Directory, "Managers")
-Languages = os.path.join(Managers, "Languages")
+import managers.APIManager as APIManager
+import managers.HTMLManager as HTMLManager
 
-sys.path.append(Directory)
-sys.path.append(Managers)
-sys.path.append(Languages)
+import languages.English as English
 
-import HTMLManager
-import APIManager
-import English
-
-def get_all_quotes(authors):
-    quotes_page = APIManager.get_quotes_page(authors)
+def get_all_quotes(author):
+    quotes_page = APIManager.get_quotes_page(author)
     webpageManager = HTMLManager.HTMLManager(quotes_page, English)
 
     quotes_start = webpageManager.start_of_quotes()
@@ -38,3 +28,6 @@ def get_all_quotes(authors):
             webpageManager.remove(element)
 
     return quotes
+
+def supported_languages():
+    return "English"

@@ -42,7 +42,7 @@ def __find_first__(ids, soup):
     if tags_found == []:
         # TODO: Correct error handling
         print("THIS IS NOT NECESSARILY AN ERROR!. Not found: {}".format(ids))
-        print("Because there are some authors that don't have any finish tag. Example: https://en.wikiquote.org/wiki/Reuben_Abel")
+        print("Because there are some author that don't have any finish tag. Example: https://en.wikiquote.org/wiki/Reuben_Abel")
     else:
         return __determine_first_appearence__(soup, tags_found)
 

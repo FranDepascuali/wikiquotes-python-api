@@ -1,5 +1,6 @@
-import unittest
+import test_context
 import wikiquotes
+import unittest
 
 class QuoteLengthTest(unittest.TestCase):
 

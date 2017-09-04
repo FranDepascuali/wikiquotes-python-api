@@ -1,15 +1,15 @@
 import requests
 
-def get_quotes_page(authors):
-    return __page_from_json__(__request__(authors))
+def get_quotes_page(author):
+    return __page_from_json__(__request__(author))
 
-def __request__(authors, url = 'https://en.wikiquote.org/w/api.php?', action = 'query', prop = 'extracts', format = 'json'):
+def __request__(author, url = 'https://en.wikiquote.org/w/api.php?', action = 'query', prop = 'extracts', format = 'json'):
     parameters = {}
     parameters['action'] = action
     parameters['prop'] = prop
     parameters['format'] = format
     parameters['redirects'] = 'redirects'
-    parameters['titles'] = authors
+    parameters['titles'] = author
 
     request = requests.get(url, params = parameters, allow_redirects=True)
     answer = request.json()

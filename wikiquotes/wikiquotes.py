@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import random
 import directory
 import os
 
 import file_manager
-import APIManager
-import HTMLManager
+import api_manager
+import html_manager
 import english
 
 def get_all_quotes(author):
@@ -35,6 +36,8 @@ def get_all_quotes(author):
 
 def random_quote(author):
     return random.choice(get_all_quotes(author))
+
+print(random_quote("Juan_Román_Riquelme"))
 
 def supported_languages():
     languages = file_manager.list_files_with_extension(directory.languages_directory, ".py")

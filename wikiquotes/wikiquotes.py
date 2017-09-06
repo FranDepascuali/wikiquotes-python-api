@@ -7,13 +7,14 @@ import file_manager
 import api_manager
 import html_manager
 import spanish
+import english
 
 def get_all_quotes(author, language):
-    quotes_page = api_manager.get_quotes_page(author, language)
-    webpageManager = html_manager.HTMLManager(quotes_page, language)
+    quotes_page = api_manager.request_quotes_page(author, language)
+    web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
-    quotes_start = webpageManager.start_of_quotes()
-    quotes_ending = webpageManager.end_of_quotes()
+    quotes_start = web_page_manager.start_of_quotes()
+    quotes_ending = web_page_manager.end_of_quotes()
 
     if quotes_start is None:
         print ("UPS")
@@ -26,13 +27,19 @@ def get_all_quotes(author, language):
             break
 
         if html_manager.is_list(element):
-            webpageManager.remove_sublists(element)
+            web_page_manager.remove_sublists(element)
             quotes.extend(html_manager.extract_all_items_from_list(element))
 
         if html_manager.is_subheading(element):
-            webpageManager.remove(element)
+            web_page_manager.remove(element)
 
     return quotes
+
+def quote_of_the_day(language):
+    quotes_page = api_manager.request_quote_of_the_day_page(language)
+    web_page_manager = html_manager.HTMLManager(quotes_page, language)
+
+    return language.quote_of_the_day_parser(web_page_manager.soup)
 
 def random_quote(author, language):
     return random.choice(get_all_quotes(author, language))

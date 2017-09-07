@@ -43,8 +43,12 @@ def last_component_of(file_path):
 def directory_of(file_path):
     return os.path.dirname(file_path)
 
-def list_files_with_extension(directory, extension):
+def list_relative_files_with_extension(directory, extension):
     return filter(lambda filename: filename.endswith(extension), os.listdir(directory))
+
+def list_absolute_files_with_extension(directory, extension):
+    relative_paths = list_relative_files_with_extension(directory, extension)
+    return map(lambda relative_path: join(directory, relative_path), relative_paths)
 
 def join(baseurl, path_to_append):
     ensure_directory_exists(baseurl)

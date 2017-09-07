@@ -1,0 +1,15 @@
+Edsger_W._Dijkstra
+english
+
+For a number of years I have been familiar with the observation that the quality of programmers is a decreasing function of the density of go to statements in the programs they produce. More recently I discovered why the use of the go to statement has such disastrous effects, and I became convinced that the go to statement should be abolished from all "higher level" programming languages.
+Our intellectual powers are rather geared to master static relations and that our powers to visualize processes evolving in time are relatively poorly developed. For that reason we should do (as wise programmers aware of our limitations) our utmost to shorten the conceptual gap between the static program and the dynamic process, to make the correspondence between the program (spread out in text space) and the process (spread out in time) as trivial as possible.
+Testing shows the presence, not the absence of bugs
+A convincing demonstration of correctness being impossible as long as the mechanism is regarded as a black box, our only hope lies in not regarding the mechanism as a black box.
+The competent programmer is fully aware of the strictly limited size of his own skull; therefore he approaches the programming task in full humility, and among other things he avoids clever tricks like the plague.
+For me, the first challenge for computing science is to discover how to maintain order in a finite, but very large, discrete universe that is intricately intertwined. And a second, but not less important challenge is how to mould what you have achieved in solving the first problem, into a teachable discipline: it does not suffice to hone your own intellect (that will join you in your grave), you must teach others how to hone theirs. The more you concentrate on these two challenges, the clearer you will see that they are only two sides of the same coin: teaching yourself is discovering what is teachable.
+We must be very careful when we give advice to younger people: sometimes they follow it!
+The use of COBOL cripples the mind; its teaching should, therefore, be regarded as a criminal offense.
+Thank goodness we don't have only serious problems, but ridiculous ones as well.
+In the wake of the Cultural Revolution and now of the recession I observe a mounting pressure to co-operate and to promote "teamwork". For its anti-individualistic streak, such a drive is of course highly suspect; some people may not be so sensitive to it, but having seen the Hitlerjugend in action suffices for the rest of your life to be very wary of "team spirit". Very.
+It is not the task of the University to offer what society asks for, but to give what society needs.
+The precious gift that this Turing Award acknowledges is Dijkstra's style: his approach to programming as a high, intellectual challenge; his eloquent insistence and practical demonstration that programs should be composed correct, not just debugged into correctness; and his illuminating perception of problems at the foundations of program design.

@@ -11,13 +11,14 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name = 'wikiquote',
+    name = 'wikiquotes',
     version = '0.1.0',
-    description = 'Wikiquote python API',
+    description = 'Wikiquotes python API',
     long_description = readme,
     author = 'Francisco Depascuali',
     author_email = 'francisco.depascuali@gmail.com',
-    url = 'https://github.com/kennethreitz/samplemod',
+    url = 'https://github.com/FranDepascuali/wikiquotes-python-api',
     license = license,
-    packages = find_packages(exclude=('tests'))
+    test_suite="tests"
+    # packages = find_packages(exclude=('tests'))
 )

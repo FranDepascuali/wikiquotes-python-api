@@ -27,7 +27,6 @@ class HTMLManager:
             child.decompose()
 
     def pretty_print(self):
-        print self.soup
         print(self.soup.prettify())
 
 def is_list(item):
@@ -40,8 +39,8 @@ def is_subheading(item):
     return isinstance(item, Tag) and item.name == "h3"
 
 def _find_first(ids, soup):
-    maybe_tags_found = map(lambda id: soup.find(id = id), ids)
-    tags_found = filter(None, maybe_tags_found)
+    maybe_tags_found = list(map(lambda id: soup.find(id = id), ids))
+    tags_found = list(filter(None, maybe_tags_found))
 
     if tags_found == []:
         # TODO: Correct error handling
@@ -52,4 +51,4 @@ def _find_first(ids, soup):
 
 def _determine_first_appearence(soup, tags):
     all_tags = soup.find_all(True)
-    return min(tags, key = lambda tag: all_tags.index(tag))
+    return min(tags, key = all_tags.index)

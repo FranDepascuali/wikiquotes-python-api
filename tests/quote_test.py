@@ -9,7 +9,7 @@ class QuoteTest(unittest.TestCase):
 
     def test_Reuben_Abel(self):
         print "test_Reuben_Abel"
-        quotes = wikiquotes.get_all_quotes('Reuben_Abel', english)
+        quotes = wikiquotes.get_quotes('Reuben_Abel', english)
         first_quote = quotes[0]
         wiki_quote = "The continuum in which we live is not the kind of place in which middles can be unambiguously excluded."
         self.assertEqual(wiki_quote, first_quote)
@@ -21,7 +21,7 @@ class QuoteTest(unittest.TestCase):
         correct_quotes.append("When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.")
         correct_quotes.append("Taiwanese independence is a dead end.")
 
-        quotes = wikiquotes.get_all_quotes('Hau Pei-tsun', english)
+        quotes = wikiquotes.get_quotes('Hau Pei-tsun', english)
         self.assertEqual(set(quotes), set(correct_quotes))
 
     def test_Jack_Abbott(self):
@@ -36,7 +36,7 @@ class QuoteTest(unittest.TestCase):
         correct_quotes.append("I feel that if I ever did adjust to prison, I could by that alone never adjust to society.")
         correct_quotes.append("This world is nothing. An illusion. Death is the release.")
 
-        quotes = wikiquotes.get_all_quotes('Jack_Abbott', english)
+        quotes = wikiquotes.get_quotes('Jack_Abbott', english)
 
         self.assertEqual(set(quotes), set(correct_quotes))
 
@@ -61,7 +61,7 @@ class QuoteTest(unittest.TestCase):
         incorrect_quotes.append("Computer Science is no more about computers than astronomy is about telescopes.")
         incorrect_quotes.append("Go To statement considered harmful")
 
-        quotes = wikiquotes.get_all_quotes('Edsger_W._Dijkstra', english)
+        quotes = wikiquotes.get_quotes('Edsger_W._Dijkstra', english)
 
         self.assertTrue(set(correct_quotes).issubset(set(quotes)))
         self.assertFalse(set(incorrect_quotes).issubset(set(quotes)))

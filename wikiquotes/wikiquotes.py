@@ -42,7 +42,7 @@ def quote_of_the_day(language):
     return language.quote_of_the_day_parser(web_page_manager.soup)
 
 def random_quote(author, language):
-    return random.choice(get_all_quotes(author, language))
+    return random.choice(get_quotes(author, language))
 
 def supported_languages():
     languages = file_manager.list_files_with_extension(directory.languages_directory, ".py")

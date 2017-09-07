@@ -18,4 +18,5 @@ def quote_of_the_day_parser(html):
     quote = td[2].text.strip()
     author = td[-1].div.a.text.strip()
 
-    return (quote, author)
+    # Author and quote could have an accent
+    return (quote.encode('utf-8'), author.encode('utf-8'))

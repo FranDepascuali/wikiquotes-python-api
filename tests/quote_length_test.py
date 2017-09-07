@@ -29,7 +29,7 @@ class QuoteLengthTest(unittest.TestCase):
         # We don't want tests to break if there is a new quote.
         self.assertTrue(len(quotes) >= quotes_length)
 
-        # No repeted elements
+        # No repeated elements
         self.assertEqual(len(quotes), len(set(quotes)))
 
 def main():

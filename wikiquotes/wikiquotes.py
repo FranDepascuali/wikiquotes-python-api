@@ -9,7 +9,7 @@ import html_manager
 import spanish
 import english
 
-def get_all_quotes(author, language):
+def get_quotes(author, language):
     quotes_page = api_manager.request_quotes_page(author, language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 

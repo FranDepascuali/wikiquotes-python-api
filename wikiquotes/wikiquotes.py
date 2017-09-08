@@ -2,7 +2,6 @@ import random
 import directory
 import os
 import logging_manager
-
 import file_manager
 import api_manager
 import html_manager
@@ -18,9 +17,7 @@ def get_quotes(author, language):
     quotes_ending = web_page_manager.end_of_quotes()
 
     if quotes_start is None:
-        logging_manager.logger.error("Quotes start not found for {}:{}".format(author, str(language)), exc_info=True)
-        raise QuoteStartNotFoundException()
-
+        logging_manager.logger.info("Quotes start not found for {}:{}".format(author, str(language)), exc_info=True)
     quotes = []
 
     for element in quotes_start.next_elements:

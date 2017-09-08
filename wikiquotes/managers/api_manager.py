@@ -7,7 +7,10 @@ def request_quote_of_the_day_page(language):
 
 def request_quotes_page(title, language):
     try:
-        return _request_via_api(title, language.base_url)
+        answer = _request_via_api(title, language.base_url)
+        if answer is None:
+            raise custom_exceptions.PageNotFoundException
+        return answer
     except custom_exceptions.PageNotFoundException:
         logging_manager.logger.error("Quotes not found: {}: {}".format(title, str(language)))
 

@@ -6,7 +6,10 @@ def request_quote_of_the_day_page(language):
     return _request_via_api_via_scrapping(language.quote_of_the_day_url, language)
 
 def request_quotes_page(title, language):
-    return _request_via_api(title, language.base_url)
+    try:
+        return _request_via_api(title, language.base_url)
+    except custom_exceptions.PageNotFoundException:
+        logging_manager.logger.error("Quotes not found: {}: {}".format(title, str(language)))
 
 def _request_via_api(title, base_url, action = 'query', prop = 'extracts', format = 'json', redirects = True):
     parameters = {}
@@ -18,13 +21,17 @@ def _request_via_api(title, base_url, action = 'query', prop = 'extracts', forma
 
     request = requests.get(base_url, params = parameters, allow_redirects = redirects)
 
-    # TODO: This should be for debug
-    logging_manager.logger.info("Requesting via API: {}".format(request.url))
-
     if format == "json":
         answer = request.json()
     else:
+        logging_manager.logger.error("Incorrect format (json expected)", exc_info=True)
         raise custom_exceptions.IncorrectAPIFormatException()
+
+    try:
+        quotes_page = _page_from_json(answer)
+    except KeyError:
+        logging_manager.logger.error("Quotes not found {}".format(request.url), exc_info=True)
+        raise custom_exceptions.PageNotFoundException()
 
     return _page_from_json(answer)
 

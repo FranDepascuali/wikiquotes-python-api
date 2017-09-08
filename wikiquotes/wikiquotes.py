@@ -1,6 +1,7 @@
 import random
 import directory
 import os
+import logging_manager
 
 import file_manager
 import api_manager
@@ -8,6 +9,7 @@ import html_manager
 import spanish
 import english
 
+@logging_manager.log_method_call
 def get_quotes(author, language):
     quotes_page = api_manager.request_quotes_page(author, language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
@@ -16,7 +18,8 @@ def get_quotes(author, language):
     quotes_ending = web_page_manager.end_of_quotes()
 
     if quotes_start is None:
-        raise QuoteStartNotFoundException
+        logging_manager.logger.error("Quotes start not found for {}:{}".format(author, str(language)), exc_info=True)
+        raise QuoteStartNotFoundException()
 
     quotes = []
 
@@ -33,15 +36,20 @@ def get_quotes(author, language):
 
     return quotes
 
+@logging_manager.log_method_call
 def quote_of_the_day(language):
     quotes_page = api_manager.request_quote_of_the_day_page(language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
     return language.quote_of_the_day_parser(web_page_manager.soup)
 
+@logging_manager.log_method_call
 def random_quote(author, language):
     return random.choice(get_quotes(author, language))
 
+@logging_manager.log_method_call
 def supported_languages():
     languages = file_manager.list_relative_files_with_extension(directory.languages_directory, ".py")
     return map(lambda language: language.replace(".py", ""), languages)
+
+print(random_quote("Marcelo_Bielsa", spanish))

@@ -20,3 +20,5 @@ for subdirectory in visible_subdirectories:
 
 languages_directory = _look_for("languages", visible_subdirectories)
 authors_directory = _look_for("authors", visible_subdirectories)
+logs_directory = _look_for("logs", visible_subdirectories)
+log_path = os.path.join(logs_directory, "debug.log")

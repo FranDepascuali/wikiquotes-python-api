@@ -1,4 +1,6 @@
 import requests
+import logging_manager
+import custom_exceptions
 
 def request_quote_of_the_day_page(language):
     return _request_via_api_via_scrapping(language.quote_of_the_day_url, language)
@@ -17,20 +19,19 @@ def _request_via_api(title, base_url, action = 'query', prop = 'extracts', forma
     request = requests.get(base_url, params = parameters, allow_redirects = redirects)
 
     # TODO: This should be for debug
-    print ("Requesting via API: {}".format(request.url))
+    logging_manager.logger.info("Requesting via API: {}".format(request.url))
 
     if format == "json":
         answer = request.json()
     else:
-        # TODO: Correct error handling
-        print("Error: Unsupported format")
+        raise custom_exceptions.IncorrectAPIFormatException()
 
     return _page_from_json(answer)
 
 # Use this if it can't be achieved by _request_via_api (because _request_via_api solves redirects automatically)
 def _request_via_api_via_scrapping(page, language):
     request = requests.get(page)
-    print("Requesting via scrapping: {}".format(page))
+    logging_manager.logger.info("Requesting via scrapping: {}".format(page))
     return request.content
 
 # Wikiquote api returns an html page inside the content ('extract')
@@ -40,6 +41,9 @@ def _page_from_json(wikiquote_answer):
     text = ""
 
     for (key, value) in pages.items():
-        text += pages[key]['extract']
+        try:
+            text += pages[key]['extract']
+        except KeyError:
+            raise custom_exceptions.PageNotFoundException()
 
     return text

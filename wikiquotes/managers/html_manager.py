@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup, Tag
 
+import logging_manager
+
 class HTMLManager:
 
     def __init__(self, html, language):
@@ -33,7 +35,7 @@ def is_list(item):
     return isinstance(item, Tag) and item.name == "ul"
 
 def extract_all_items_from_list(html_list):
-    return map(lambda li_quote: li_quote.text.encode('utf-8').strip(), html_list.find_all("li"))
+    return map(lambda li_quote: li_quote.text.strip(), html_list.find_all("li"))
 
 def is_subheading(item):
     return isinstance(item, Tag) and item.name == "h3"
@@ -44,8 +46,8 @@ def _find_first(ids, soup):
 
     if tags_found == []:
         # TODO: Correct error handling
-        print("THIS IS NOT NECESSARILY AN ERROR!. Not found: {}".format(ids))
-        print("Because there are some author that don't have any finish tag. Example: https://en.wikiquote.org/wiki/Reuben_Abel")
+        logging_manager.logger.info("THIS IS NOT NECESSARILY AN ERROR!. Not found: {}".format(ids))
+        logging_manager.logger.info("Because there are some author that don't have any finish tag. Example: https://en.wikiquote.org/wiki/Reuben_Abel")
     else:
         return _determine_first_appearence(soup, tags_found)
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import random
 import directory
 import os
@@ -17,8 +16,7 @@ def get_quotes(author, language):
     quotes_ending = web_page_manager.end_of_quotes()
 
     if quotes_start is None:
-        print ("UPS")
-        return []
+        raise QuoteStartNotFoundException
 
     quotes = []
 

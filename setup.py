@@ -20,5 +20,4 @@ setup(
     url = 'https://github.com/FranDepascuali/wikiquotes-python-api',
     license = license,
     test_suite="tests"
-    # packages = find_packages(exclude=('tests'))
 )

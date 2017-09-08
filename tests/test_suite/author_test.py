@@ -18,7 +18,11 @@ class AuthorTest(parametrized_test_case.ParametrizedTestCase):
         language = importlib.import_module(self.author.language)
         fetch_quotes = wikiquotes.get_quotes(self.author.name, language)
 
-        self.assertTrue(set(self.author.quotes).issubset(set(fetch_quotes)))
+        # This can be done like this set(self.author.quotes).issubset(set(fetch_quotes))
+        # But we need to know which elements
+        not_in_fetch_quotes = set(self.author.quotes) - set(fetch_quotes)
+
+        self.assertSetEqual(set([]), not_in_fetch_quotes, msg = "Author: {}. Quotes not fetch: {}".format(self.author.name, not_in_fetch_quotes))
 
     def test_quotes_length(self):
         language = importlib.import_module(self.author.language)
@@ -48,7 +52,7 @@ class AuthorTest(parametrized_test_case.ParametrizedTestCase):
                 if not random_quote == other_random_quote:
                     return
 
-        self.fail("Incorrect random quotes for {}".format('Reuben_Abel'))
+        self.fail("Incorrect random quotes for {}".format(self.author.name))
 
     @property
     def author(self):

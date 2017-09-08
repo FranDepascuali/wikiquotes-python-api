@@ -51,5 +51,3 @@ def random_quote(author, language):
 def supported_languages():
     languages = file_manager.list_relative_files_with_extension(directory.languages_directory, ".py")
     return map(lambda language: language.replace(".py", ""), languages)
-
-print(random_quote("Marcelo_Bielsa", spanish))

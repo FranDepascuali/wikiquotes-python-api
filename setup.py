@@ -12,7 +12,7 @@ with open('LICENSE') as f:
 
 setup(
     name = 'wikiquotes',
-    version = '0.1.0',
+    version = '1.0',
     description = 'Wikiquotes python API',
     long_description = readme,
     classifiers=[

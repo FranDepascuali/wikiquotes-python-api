@@ -8,12 +8,6 @@ class HTMLManager:
         self.language = language
         self.soup = BeautifulSoup(html, "lxml")
 
-    def start_of_quotes(self):
-        return _find_first(self.language.startings, self.soup)
-
-    def end_of_quotes(self):
-        return _find_first(self.language.endings, self.soup)
-
     # Although this doesn't need self, it mutates state so it's better to have it here and not as a free function.
     def remove_sublists(self, html_list):
             list_items = html_list.find_all('li')
@@ -31,26 +25,8 @@ class HTMLManager:
     def pretty_print(self):
         print(self.soup.prettify())
 
-def is_list(item):
-    return isinstance(item, Tag) and item.name == "ul"
+    def find_all_lists(self):
+        return self.soup.find_all("ul")
 
-def extract_all_items_from_list(html_list):
+def extract_text_from_list(html_list):
     return map(lambda li_quote: li_quote.text.strip(), html_list.find_all("li"))
-
-def is_subheading(item):
-    return isinstance(item, Tag) and item.name == "h3"
-
-def _find_first(ids, soup):
-    maybe_tags_found = list(map(lambda id: soup.find(id = id), ids))
-    tags_found = list(filter(None, maybe_tags_found))
-
-    if tags_found == []:
-        # TODO: Correct error handling
-        logging_manager.logger.info("THIS IS NOT NECESSARILY AN ERROR!. Not found: {}".format(ids))
-        logging_manager.logger.info("Because there are some author that don't have any finish tag. Example: https://en.wikiquote.org/wiki/Reuben_Abel")
-    else:
-        return _determine_first_appearence(soup, tags_found)
-
-def _determine_first_appearence(soup, tags):
-    all_tags = soup.find_all(True)
-    return min(tags, key = all_tags.index)

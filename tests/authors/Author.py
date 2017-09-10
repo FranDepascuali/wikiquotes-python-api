@@ -8,5 +8,5 @@ class Author:
             content = list(map(lambda sentence: sentence.strip(), f.readlines()))
 
         self.name = content[0]
-        self.language = content[1].lower()
+        self.language = content[1]
         self.quotes = content[3:]

@@ -3,7 +3,6 @@
 
 import unittest
 import parametrized_test_case
-import importlib
 
 import directory
 import wikiquotes
@@ -15,7 +14,7 @@ random_tries = 3
 class AuthorTest(parametrized_test_case.ParametrizedTestCase):
 
     def test_get_quotes(self):
-        language = importlib.import_module(self.author.language)
+        language = self.author.language
         fetch_quotes = wikiquotes.get_quotes(self.author.name, language)
 
         # This can be done like this set(self.author.quotes).issubset(set(fetch_quotes))
@@ -25,7 +24,7 @@ class AuthorTest(parametrized_test_case.ParametrizedTestCase):
         self.assertSetEqual(set([]), not_in_fetch_quotes, msg = "Author: {}. Quotes not fetch: {}".format(self.author.name, not_in_fetch_quotes))
 
     def test_quotes_length(self):
-        language = importlib.import_module(self.author.language)
+        language = self.author.language
         fetch_quotes = wikiquotes.get_quotes(self.author.name, language)
         # It is probable that new quotes are added.
         # The assumption is that quotes aren't removed.
@@ -37,7 +36,7 @@ class AuthorTest(parametrized_test_case.ParametrizedTestCase):
         self.assertEqual(len(fetch_quotes), len(set(fetch_quotes)))
 
     def test_random_quote(self):
-        language = importlib.import_module(self.author.language)
+        language = self.author.language
         fetch_quotes = wikiquotes.get_quotes(self.author.name, language)
         number_of_quotes = len(fetch_quotes)
 

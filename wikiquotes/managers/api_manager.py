@@ -9,7 +9,7 @@ def request_quotes_page(title, language):
     try:
         answer = _request_via_api(title, language.base_url)
         if answer is None:
-            raise custom_exceptions.PageNotFoundException
+            raise custom_exceptions.PageNotFoundException()
         return answer
     except custom_exceptions.PageNotFoundException:
         logging_manager.logger.error("Quotes not found: {}: {}".format(title, str(language)))

@@ -3,3 +3,4 @@ requests
 pytest
 tox
 lxml
+unidecode

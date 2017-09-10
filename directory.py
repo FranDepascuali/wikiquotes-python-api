@@ -1,5 +1,7 @@
 import os
 import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def __is_visible_directory__(directory):
     return not '.' in directory and not "__" in directory

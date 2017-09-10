@@ -1,48 +1,46 @@
 import random
-import directory
 import os
+
+import directory
 import logging_manager
 import file_manager
 import api_manager
 import html_manager
-import spanish
-import english
+import language_manager
 
 @logging_manager.log_method_call
-def get_quotes(author, language):
+def get_quotes(author, raw_language):
+    language = language_manager.LanguageManager(raw_language).language
     quotes_page = api_manager.request_quotes_page(author, language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
-    quotes_start = web_page_manager.start_of_quotes()
-    quotes_ending = web_page_manager.end_of_quotes()
-
-    if quotes_start is None:
-        logging_manager.logger.info("Quotes start not found for {}:{}".format(author, str(language)), exc_info=True)
+    html_lists = web_page_manager.find_all_lists()
     quotes = []
 
-    for element in quotes_start.next_elements:
-        if element == quotes_ending:
-            break
-
-        if html_manager.is_list(element):
-            web_page_manager.remove_sublists(element)
-            quotes.extend(html_manager.extract_all_items_from_list(element))
-
-        if html_manager.is_subheading(element):
-            web_page_manager.remove(element)
+    # Almost every quote structure is:
+    # <ul>
+    #   <li> Quote text </li>
+    #   <ul>
+    #       <li> author or some reference</li>
+    #   </ul>
+    # </ul>
+    for html_list in html_lists:
+        web_page_manager.remove_sublists(html_list)
+        quotes.extend(html_manager.extract_text_from_list(html_list))
 
     return quotes
 
 @logging_manager.log_method_call
-def quote_of_the_day(language):
+def quote_of_the_day(raw_language):
+    language = language_manager.LanguageManager(raw_language).language
     quotes_page = api_manager.request_quote_of_the_day_page(language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
     return language.quote_of_the_day_parser(web_page_manager.soup)
 
 @logging_manager.log_method_call
-def random_quote(author, language):
-    return random.choice(get_quotes(author, language))
+def random_quote(author, raw_language):
+    return random.choice(get_quotes(author, raw_language))
 
 @logging_manager.log_method_call
 def supported_languages():

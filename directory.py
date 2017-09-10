@@ -1,7 +1,16 @@
-import os
 import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+def _get_python_version():
+    version = sys.version_info
+    return (version.major, version.minor)
+
+python_version = _get_python_version()
+
+import os
+
+if python_version[0] == 2:
+    # In python 3.x, the default encoding is already utf8.
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 
 def __is_visible_directory__(directory):
     return not '.' in directory and not "__" in directory

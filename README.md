@@ -16,8 +16,8 @@ This library is intended to be a python API for wikiquotes (inspired by [python-
 
 >>> wikiquotes.get_quotes('Hau Pei-tsun', "english")
 # [u"The slogans of 'countering back the mainland' created by Chiang Kai-shek and 'liberating Taiwan' by Mao Zedong several decades ago should be forgotten because none of them could be put into practice.", 
-   u'When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.', 
-   u'Taiwanese independence is a dead end.']
+#  u'When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.', 
+#  u'Taiwanese independence is a dead end.']
 
 >>> wikiquotes.quote_of_the_day("english")
 # (u'Even after killing ninety nine tigers the Maharaja should beware of the hundredth.', u'Kalki Krishnamurthy')

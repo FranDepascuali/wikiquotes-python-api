@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/python-2.x%2F3.x-blue.svg)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 # wikiquotes-python-api
 
 This library is intended to be a python API for wikiquotes (inspired by [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/)).

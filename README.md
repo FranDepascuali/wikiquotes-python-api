@@ -8,11 +8,16 @@ This library is intended to be a python API for wikiquotes (inspired by [python-
 ## Table of Contents
   * [Usage](#usage)
   * [Motivation](#motivation)
+  * [Search](#search)
+  * [Output](#output)
   * [Testing](#testing)
 
 ## Usage
 ```python
 >>> import wikiquotes
+
+>>> wikiquotes.search("gandi", "english")
+[u'Mahatma Gandhi', u'Indira Gandhi', u'Rahul Gandhi', u'Rajiv Gandhi', u'Arun Manilal Gandhi', u'Gandhi (film)', u'Anand Gandhi', u'Virchand Gandhi', u'Maneka Gandhi', u'Blindness']
 
 >>> wikiquotes.get_quotes('Hau Pei-tsun', "english")
 # [u"The slogans of 'countering back the mainland' created by Chiang Kai-shek and 'liberating Taiwan' by Mao Zedong several decades ago should be forgotten because none of them could be put into practice.", 
@@ -47,6 +52,28 @@ This project:
 3. Uses requests and BeautifulSoup, which abstract great part of the complexity which is present in [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
 
 Anyway, the correct approach would be to try both and stick with the one that gives you the best results.
+
+## Search
+Quotes are retrieved by searching first for the correct author. This strives for robustness, because it allows to return a quote whether the input is the correct name of the author or not. At the same time, note that subsequent calls to WikiQuotes api have to be made to grab suggestions (see [here]()).
+
+Example: 
+"shakspare" -> "shakespeare" -> ['William Shakespeare', 'Last words in Shakespeare', 'Shakespeare in Love', ...]
+-> get_quotes = 4 calls.
+
+## Output
+
+While in python 3.x str type = unicode, in python 2.x str type != unicode. Therefore (and to be consistent), all string output are unicode strings, independent of python's version. 
+If you call any function from the API that have non-english characters, you will see some weird characters.
+```python
+>>> wikiquotes.random_quote("borges", "español")
+# u'\xabTodos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes\xbb.'
+```
+This is not incorrect, it is the underlying representation of the format of the string. 
+You could encode the string in utf-8 and print it (or just print it and your python interpreter should convert it automatically).
+```python
+>>> print(u'\xabTodos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes\xbb.'.encode('utf8'))
+# «Todos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes».
+```
 
 ## Testing
 The approach for testing changed: at a first glance, testing was done by manually adding the code to test each author. 

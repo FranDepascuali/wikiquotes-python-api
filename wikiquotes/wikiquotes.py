@@ -9,7 +9,6 @@ import html_manager
 import language_manager
 import custom_exceptions
 
-@logging_manager.log_method_call
 def search(author, raw_language):
     language = language_manager.LanguageManager(raw_language).language
     try:
@@ -20,7 +19,6 @@ def search(author, raw_language):
 
     return list(map(language_manager.transform_to_unicode, search_results))
 
-@logging_manager.log_method_call
 def get_quotes(author, raw_language):
     language = language_manager.LanguageManager(raw_language).language
 
@@ -44,7 +42,6 @@ def get_quotes(author, raw_language):
 
     return list(map(language_manager.transform_to_unicode, quotes))
 
-@logging_manager.log_method_call
 def quote_of_the_day(raw_language):
     language = language_manager.LanguageManager(raw_language).language
     quotes_page = api_manager.request_quote_of_the_day_page(language)
@@ -54,11 +51,9 @@ def quote_of_the_day(raw_language):
     quote_of_the_day = (language_manager.transform_to_unicode(quote_of_the_day[0]), language_manager.transform_to_unicode(quote_of_the_day[1]))
     return quote_of_the_day
 
-@logging_manager.log_method_call
 def random_quote(author, raw_language):
     return random.choice(get_quotes(author, raw_language))
 
-@logging_manager.log_method_call
 def supported_languages():
     languages = file_manager.list_relative_files_with_extension(directory.languages_directory, ".py")
     return map(lambda language: language.replace(".py", ""), languages)

@@ -7,11 +7,18 @@ import file_manager
 import api_manager
 import html_manager
 import language_manager
+import custom_exceptions
 
 @logging_manager.log_method_call
 def search(author, raw_language):
     language = language_manager.LanguageManager(raw_language).language
-    return list(map(language_manager.transform_to_unicode, api_manager.request_titles(author, language)))
+    try:
+        search_results = api_manager.request_titles(author, language)
+    except custom_exceptions.NoTitleException:
+        logging_manager.logger.error("Author not found: {}: {}".format(author, raw_language))
+        raise
+
+    return list(map(language_manager.transform_to_unicode, search_results))
 
 @logging_manager.log_method_call
 def get_quotes(author, raw_language):

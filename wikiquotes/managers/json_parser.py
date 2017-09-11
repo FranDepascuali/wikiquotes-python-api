@@ -27,7 +27,7 @@ def correct_title_from_json(wikiquote_answer):
     search =  wikiquote_answer['query']['search']
 
     if search == []:
-        raise custom_exceptions.NoTitleException
+        raise custom_exceptions.TitleNotFound
 
     search_titles = []
 

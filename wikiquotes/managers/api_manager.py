@@ -12,8 +12,6 @@ def request_quotes_page(title, language):
         raise custom_exceptions.PageNotFoundException()
 
     return json_parser.quotes_from_json(answer)
-    # except custom_exceptions.PageNotFoundException:
-    #     logging_manager.logger.error("Quotes not found: {}: {}".format(title, str(language)))
 
 def request_titles(title, language):
     answer = None
@@ -22,9 +20,6 @@ def request_titles(title, language):
     while not isinstance(search_result, list):
         answer = _search_for_correct_title_via_api(search_result, language.base_url)
         search_result = json_parser.correct_title_from_json(answer)
-
-        if search_result is None:
-            raise custom_exceptions.PageNotFoundException()
 
     return search_result
 
@@ -57,13 +52,6 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
         logging_manager.logger.error("Incorrect format (json expected)", exc_info=True)
         raise custom_exceptions.IncorrectAPIFormatException()
 
-    # try:
-    #     quotes_page = _quotes_from_json(answer)
-    # except KeyError:
-    #     logging_manager.logger.error("Quotes not found {}".format(request.url), exc_info=True)
-    #     raise custom_exceptions.PageNotFoundException()
-
-    # return _quotes_from_json(answer)
     return answer
 
 # Use this if it can't be achieved by _request_via_api (because _request_via_api solves redirects automatically)

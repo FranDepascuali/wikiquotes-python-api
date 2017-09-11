@@ -7,5 +7,5 @@ class PageNotFoundException(Exception):
 class UnsupportedLanguageException(Exception):
     pass
 
-class NoTitleException(Exception):
+class TitleNotFound(Exception):
     pass

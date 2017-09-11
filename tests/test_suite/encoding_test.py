@@ -14,7 +14,7 @@ class EncodingTest(unittest.TestCase):
         self.assertEqual(english, _generate("English"))
         self.assertEqual(english, _generate("english"))
         self.assertEqual(english, _generate("en"))
-        # self.assertEqual(english, _generate("Inglés"))
+        self.assertEqual(english, _generate("Inglés"))
         self.assertEqual(english, _generate("Ingles"))
         self.assertEqual(english, _generate("ingles"))
 

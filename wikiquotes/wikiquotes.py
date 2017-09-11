@@ -9,9 +9,16 @@ import html_manager
 import language_manager
 
 @logging_manager.log_method_call
+def search(author, raw_language):
+    language = language_manager.LanguageManager(raw_language).language
+    return list(map(language_manager.transform_to_unicode, api_manager.request_titles(author, language)))
+
+@logging_manager.log_method_call
 def get_quotes(author, raw_language):
     language = language_manager.LanguageManager(raw_language).language
-    quotes_page = api_manager.request_quotes_page(author, language)
+
+    suggested_author = search(author, raw_language)[0]
+    quotes_page = api_manager.request_quotes_page(suggested_author, language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
     html_lists = web_page_manager.find_all_lists()
@@ -28,8 +35,6 @@ def get_quotes(author, raw_language):
         web_page_manager.remove_sublists(html_list)
         quotes.extend(html_manager.extract_text_from_list(html_list))
 
-
-
     return list(map(language_manager.transform_to_unicode, quotes))
 
 @logging_manager.log_method_call
@@ -44,8 +49,7 @@ def quote_of_the_day(raw_language):
 
 @logging_manager.log_method_call
 def random_quote(author, raw_language):
-    quote = random.choice(get_quotes(author, raw_language))
-    return language_manager.transform_to_unicode(quote)
+    return random.choice(get_quotes(author, raw_language))
 
 @logging_manager.log_method_call
 def supported_languages():

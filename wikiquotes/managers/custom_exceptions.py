@@ -6,3 +6,6 @@ class PageNotFoundException(Exception):
 
 class UnsupportedLanguageException(Exception):
     pass
+
+class NoTitleException(Exception):
+    pass

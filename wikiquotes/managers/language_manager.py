@@ -6,7 +6,6 @@ import english
 import spanish
 import custom_exceptions
 
-
 class LanguageManager:
 
     def __init__(self, language_string):

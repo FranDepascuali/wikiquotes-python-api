@@ -8,4 +8,4 @@ def quote_of_the_day_parser(html):
     author = quote_and_author[1].text.replace("~", "").strip()
 
     # Author name could have an accent
-    return (quote.encode('utf-8'), author.encode('utf-8'))
+    return (quote, author)

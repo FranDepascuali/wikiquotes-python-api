@@ -15,7 +15,7 @@ def log_method_call(task):
     def callable(*args, **kwargs):
         frame = inspect.stack()[1]
         module = inspect.getmodule(frame[0])
-        function_called = "{}.{}".format(module.__name__, task.__name__)
+        function_called = "{}".format(task.__name__)
         logging.info("{} started: ".format(function_called))
         start_detection = time.time()
         task(*args, **kwargs)

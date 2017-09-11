@@ -59,18 +59,14 @@ class AuthorTest(parametrized_test_case.ParametrizedTestCase):
 
 def main():
     suite = unittest.TestSuite()
-    tests = map(_create_test_for_author, _fetch_all_authors())
+    tests = map(_create_test_for_author, Author.fetch_all_authors())
 
     for test in tests:
         suite.addTest(test)
 
     unittest.TextTestRunner(verbosity=2).run(suite)
 
-def _fetch_all_authors():
-    return file_manager.list_absolute_files_with_extension(directory.authors_directory, ".txt")
-
-def _create_test_for_author(author_test_file_path):
-    author = Author.Author(author_test_file_path)
+def _create_test_for_author(author):
     return parametrized_test_case.ParametrizedTestCase.parametrize(AuthorTest, parameter=author)
 
 if __name__ == '__main__':

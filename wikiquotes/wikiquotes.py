@@ -28,7 +28,9 @@ def get_quotes(author, raw_language):
         web_page_manager.remove_sublists(html_list)
         quotes.extend(html_manager.extract_text_from_list(html_list))
 
-    return quotes
+
+
+    return list(map(language_manager.transform_to_unicode, quotes))
 
 @logging_manager.log_method_call
 def quote_of_the_day(raw_language):
@@ -36,11 +38,14 @@ def quote_of_the_day(raw_language):
     quotes_page = api_manager.request_quote_of_the_day_page(language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
-    return language.quote_of_the_day_parser(web_page_manager.soup)
+    quote_of_the_day = language.quote_of_the_day_parser(web_page_manager.soup)
+    quote_of_the_day = (language_manager.transform_to_unicode(quote_of_the_day[0]), language_manager.transform_to_unicode(quote_of_the_day[1]))
+    return quote_of_the_day
 
 @logging_manager.log_method_call
 def random_quote(author, raw_language):
-    return random.choice(get_quotes(author, raw_language))
+    quote = random.choice(get_quotes(author, raw_language))
+    return language_manager.transform_to_unicode(quote)
 
 @logging_manager.log_method_call
 def supported_languages():

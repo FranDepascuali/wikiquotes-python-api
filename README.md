@@ -9,7 +9,6 @@ This library is intended to be a python API for wikiquotes (inspired by [python-
 
   * [Motivation](#motivation)
   * [Usage](#usage)
-  * [Languages](#languages)
   * [Testing](#testing)
 
 ## Motivation
@@ -49,9 +48,6 @@ Anyway, the correct approach would be to try both and stick with the one that gi
 >>> wikiquotes.supported_languages()
 # ['english', 'spanish']
 ```
-
-## Languages
-Wikiquotes currently support English and Spanish.
 
 ## Testing
 The approach for testing changed: at a first glance, testing was done by manually adding the code to test each author. 

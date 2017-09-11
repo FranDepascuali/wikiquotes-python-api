@@ -1,4 +1,4 @@
-# wikiquote-python-api
+# wikiquotes-python-api
 
 This library is intended to be a python API for wikiquotes (inspired by [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/)).
 
@@ -6,9 +6,8 @@ This library is intended to be a python API for wikiquotes (inspired by [python-
 
   * [Motivation](#motivation)
   * [Usage](#usage)
-  * [Languages](#bootstrap)
+  * [Languages](#languages)
   * [Testing](#testing)
-  * [About](#about)
 
 ## Motivation
 There seems to be two options for retrieving quotes from WikiQuotes using python: To implement it yourself or to use [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
@@ -28,7 +27,24 @@ Anyway, the correct approach would be to try both and stick with the one that gi
 
 ## Usage
 ```python
-TODO
+>>> import wikiquotes
+
+>>> wikiquotes.get_quotes('Hau Pei-tsun', "english")
+# [u"The slogans of 'countering back the mainland' created by Chiang Kai-shek and 'liberating Taiwan' by Mao Zedong several decades ago should be forgotten because none of them could be put into practice.", 
+   u'When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.', 
+   u'Taiwanese independence is a dead end.']
+
+>>> wikiquotes.quote_of_the_day("english")
+# (u'Even after killing ninety nine tigers the Maharaja should beware of the hundredth.', u'Kalki Krishnamurthy')
+
+>>> wikiquotes.quote_of_the_day("spanish")
+# (u'Por San Ferm\xedn, el calor no tiene fin', u'Refr\xe1n espa\xf1ol')
+
+>>> wikiquotes.random_quote("Aristotle", "english")
+# u'For the things we have to learn before we can do, we learn by doing.'
+
+>>> wikiquotes.supported_languages()
+# ['english', 'spanish']
 ```
 
 ## Languages

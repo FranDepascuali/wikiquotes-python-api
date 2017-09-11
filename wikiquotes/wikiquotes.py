@@ -14,7 +14,7 @@ def search(author, raw_language):
     language = language_manager.LanguageManager(raw_language).language
     try:
         search_results = api_manager.request_titles(author, language)
-    except custom_exceptions.NoTitleException:
+    except custom_exceptions.TitleNotFound:
         logging_manager.logger.error("Author not found: {}: {}".format(author, raw_language))
         raise
 

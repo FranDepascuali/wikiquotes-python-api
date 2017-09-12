@@ -1,4 +1,4 @@
-import custom_exceptions
+from . import custom_exceptions
 
 # Wikiquote api returns an html page inside the content ('extract')
 def quotes_from_json(wikiquote_answer):

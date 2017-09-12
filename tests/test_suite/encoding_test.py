@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 import unittest
+import sys
+import os
+sys.path.append(os.path.abspath('.'))
 
-import directory
 import wikiquotes
-import language_manager
-import spanish
-import english
-import Author
+from wikiquotes.managers import language_manager
+from wikiquotes.languages import spanish
+from wikiquotes.languages import english
+from tests.authors import Author
 
 class EncodingTest(unittest.TestCase):
 
@@ -96,7 +98,7 @@ class EncodingTest(unittest.TestCase):
         self.assertEqual(quote_of_the_day, _qotd(u"ingles"))
 
 def _generate(string):
-    return language_manager.LanguageManager(string).language
+    return language_manager.from_string(string)
 
 def _qotd(string):
     return wikiquotes.quote_of_the_day(string)

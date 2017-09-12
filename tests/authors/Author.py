@@ -1,7 +1,7 @@
 from io import open
+import os
 
-import directory
-import file_manager
+from wikiquotes.managers import file_manager
 
 class Author:
 
@@ -15,7 +15,7 @@ class Author:
         self.quotes = content[3:]
 
 def fetch_all_authors():
-    author_paths = file_manager.list_absolute_files_with_extension(directory.authors_directory, ".txt")
+    author_paths = file_manager.list_absolute_files_with_extension(os.path.abspath("tests/authors"), ".txt")
     return list(map(Author, author_paths))
 
 def random_author():

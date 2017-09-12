@@ -1,7 +1,7 @@
 import requests
-import logging_manager
-import custom_exceptions
-import json_parser
+# import logging_manager
+from . import custom_exceptions
+from . import json_parser
 
 def request_quote_of_the_day_page(language):
     return _request_via_scrapping(language.quote_of_the_day_url, language)
@@ -49,7 +49,7 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
     if format == "json":
         answer = request.json()
     else:
-        logging_manager.logger.error("Incorrect format (json expected)", exc_info=True)
+        # logging_manager.logger.error("Incorrect format (json expected)", exc_info=True)
         raise custom_exceptions.IncorrectAPIFormatException()
 
     return answer
@@ -57,5 +57,5 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
 # Use this if it can't be achieved by _request_via_api (because _request_via_api solves redirects automatically)
 def _request_via_scrapping(page, language):
     request = requests.get(page)
-    logging_manager.logger.info("Requesting via scrapping: {}".format(page))
+    # logging_manager.logger.info("Requesting via scrapping: {}".format(page))
     return request.content

@@ -2,10 +2,7 @@ import logging
 import time
 import sys
 import inspect
-
 from functools import wraps
-
-import directory
 
 logging.basicConfig(filename=directory.log_path, level = logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s')
 logger = logging

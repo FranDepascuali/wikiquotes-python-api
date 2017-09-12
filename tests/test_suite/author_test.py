@@ -1,13 +1,13 @@
 # http://eli.thegreenplace.net/2014/04/02/dynamically-generating-python-test-cases
 # NOTE: It cannot be run with pytest.
 
+import sys
+import os
 import unittest
-import parametrized_test_case
 
-import directory
+from tests.test_suite import parametrized_test_case
 import wikiquotes
-import file_manager
-import Author
+from tests.authors import Author
 
 random_tries = 3
 

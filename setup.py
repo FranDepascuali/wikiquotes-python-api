@@ -3,22 +3,35 @@
 # Learn more: https://github.com/kennethreitz/setup.py
 
 from setuptools import setup, find_packages
+import subprocess
 
-with open('README.md') as f:
-    readme = f.read()
+# Try to create an rst long_description from README.md
+try:
+    args = 'pandoc', '--to', 'rst', 'README.md'
+    long_description = subprocess.check_output(args)
+    long_description = long_description.decode()
+except Exception as error:
+    print('README.md conversion to reStructuredText failed. Error:')
+    print(error)
+    print('Setting long_description to None.')
+    long_description = None
 
 with open('LICENSE') as f:
     license = f.read()
 
+version = '1.0.1'
+
 setup(
     name = 'wikiquotes',
-    version = '1.0',
+    packages= find_packages(),
+    version = version,
     description = 'Wikiquotes python API',
-    long_description = readme,
+    long_description = long_description,
+    platforms='any',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: API :: Wikiquotes',
+        'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6'
@@ -26,6 +39,7 @@ setup(
     author = 'Francisco Depascuali',
     author_email = 'francisco.depascuali@gmail.com',
     url = 'https://github.com/FranDepascuali/wikiquotes-python-api',
+    download_url = 'https://github.com/FranDepascuali/wikiquotes-python-api/tarball/{}'.format(version),
     license = license,
     test_suite="tests"
 )

@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup, Tag
 
-import logging_manager
-
 class HTMLManager:
 
     def __init__(self, html, language):

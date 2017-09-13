@@ -23,7 +23,7 @@ with open('README.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
-version = 'v1.1'
+version = 'v1.2'
 
 setup(
     name = 'wikiquotes',
@@ -40,6 +40,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6'
     ],
+    install_requires = ['bs4', 'requests', 'lxml', 'unidecode'],
     author = 'Francisco Depascuali',
     author_email = 'francisco.depascuali@gmail.com',
     url = 'https://github.com/FranDepascuali/wikiquotes-python-api',

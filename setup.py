@@ -5,16 +5,20 @@
 from setuptools import setup, find_packages
 import subprocess
 
-# Try to create an rst long_description from README.md
-try:
-    args = 'pandoc', '--to', 'rst', 'README.md'
-    long_description = subprocess.check_output(args)
-    long_description = long_description.decode()
-except Exception as error:
-    print('README.md conversion to reStructuredText failed. Error:')
-    print(error)
-    print('Setting long_description to None.')
-    long_description = None
+# TODO: Automate README generation
+# # Try to create an rst long_description from README.md
+# try:
+#     args = 'pandoc', '--to', 'rst', 'README.md'
+#     long_description = subprocess.check_output(args)
+#     long_description = long_description.decode()
+# except Exception as error:
+#     print('README.md conversion to reStructuredText failed. Error:')
+#     print(error)
+#     print('Setting long_description to None.')
+#     long_description = None
+
+with open('README.rst') as f:
+    readme = f.read()
 
 with open('LICENSE') as f:
     license = f.read()
@@ -26,7 +30,7 @@ setup(
     packages= find_packages(),
     version = version,
     description = 'Wikiquotes python API',
-    long_description = long_description,
+    long_description = readme,
     platforms='any',
     classifiers=[
         'Development Status :: 4 - Beta',

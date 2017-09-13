@@ -7,6 +7,7 @@ This library is intended to be a python API for wikiquotes (inspired by [python-
 
 ## Table of Contents
   * [Usage](#usage)
+  * [Installation](#installation)
   * [Motivation](#motivation)
   * [Search](#search)
   * [Output](#output)
@@ -37,6 +38,10 @@ This library is intended to be a python API for wikiquotes (inspired by [python-
 # ['english', 'spanish']
 ```
 
+## Installation
+```sh
+pip install wikiquotes
+```
 ## Motivation
 There seems to be two options for retrieving quotes from WikiQuotes using python: To implement it yourself or to use [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
 At a first glance, I chose the second option and used that library. However, usage and code inspection over [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/) lead me to choose the first approach and develop a library.

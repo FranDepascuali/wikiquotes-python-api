@@ -40,7 +40,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6'
     ],
-    install_requires = ['bs4', 'requests', 'lxml', 'unidecode'],
+    install_requires = ['bs4', 'requests', 'lxml', 'unidecode', 'slacker'],
     author = 'Francisco Depascuali',
     author_email = 'francisco.depascuali@gmail.com',
     url = 'https://github.com/FranDepascuali/wikiquotes-python-api',

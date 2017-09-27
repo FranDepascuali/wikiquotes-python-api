@@ -50,7 +50,7 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
     if format == "json":
         answer = request.json()
     else:
-        logging_manager.error("Incorrect format (json expected)", exc_info=True)
+        # logging_manager.error("Incorrect format (json expected)", exc_info=True)
         raise custom_exceptions.IncorrectAPIFormatException()
 
     return answer
@@ -58,5 +58,5 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
 # Use this if it can't be achieved by _request_via_api (because _request_via_api solves redirects automatically)
 def _request_via_scrapping(page, language):
     request = requests.get(page)
-    logging_manager.info("Requesting via scrapping: {}".format(page))
+    # logging_manager.info("Requesting via scrapping: {}".format(page))
     return request.content

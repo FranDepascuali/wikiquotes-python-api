@@ -12,3 +12,5 @@ def quote_of_the_day_parser(html):
 
     # Author and quote could have an accent
     return (quote, author)
+
+non_quote_sections = ["sobre", "referencias"]

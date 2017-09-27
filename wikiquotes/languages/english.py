@@ -8,3 +8,5 @@ def quote_of_the_day_parser(html):
     author = quote_and_author[1].text.replace("~", "").strip()
 
     return (quote, author)
+
+non_quote_sections = ['cast', 'see also', 'external links', 'misquoted', 'misattributed', "about"]

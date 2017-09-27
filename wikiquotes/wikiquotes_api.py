@@ -30,6 +30,8 @@ def get_quotes(author, raw_language):
     quotes_page = api_manager.request_quotes_page(suggested_author, language)
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
+    web_page_manager.delete_sections(language.non_quote_sections)
+
     html_lists = web_page_manager.find_all_lists()
     quotes = []
 

@@ -23,7 +23,7 @@ with open('README.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
-version = 'v1.2'
+version = '1.3'
 
 setup(
     name = 'wikiquotes',
@@ -44,7 +44,7 @@ setup(
     author = 'Francisco Depascuali',
     author_email = 'francisco.depascuali@gmail.com',
     url = 'https://github.com/FranDepascuali/wikiquotes-python-api',
-    download_url = 'https://github.com/FranDepascuali/wikiquotes-python-api/tarball/{}'.format(version),
+    download_url = 'https://github.com/FranDepascuali/wikiquotes-python-api/archive/{}.tar.gz'.format(version),
     license = license,
     test_suite="tests"
 )

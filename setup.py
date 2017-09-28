@@ -23,7 +23,7 @@ with open('README.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
-version = '1.3'
+version = '1.4'
 
 setup(
     name = 'wikiquotes',

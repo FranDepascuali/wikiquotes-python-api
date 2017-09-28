@@ -1,5 +1,5 @@
 ![Python](https://img.shields.io/badge/python-2.x%2F3.x-blue.svg)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
 # wikiquotes-python-api
 
@@ -57,6 +57,21 @@ This project:
 3. Uses requests and BeautifulSoup, which abstract great part of the complexity which is present in [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
 
 Anyway, the correct approach would be to try both and stick with the one that gives you the best results.
+
+This project also gets to avoid fetching quotes included in about section. For example, if using [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/) and not this project:
+```python
+import wikiquote 
+print(wikiquote.quotes('Ada Lovelace'))
+```
+will fetch *"A large, coarse-skinned young woman but with something of my friend's features, particularly the mouth."*
+which wasn't said by Ada Lovelace (but said about her). 
+
+While if you use this library, that quote and quotes about someone will not appear.
+```python
+import wikiquotes
+print(wikiquotes.get_quotes('Ada Lovelace', 'english'))"
+```
+*"A large, coarse-skinned young woman but with something of my friend's features, particularly the mouth."* doesn't appear because it wasn't said by Ada Lovelace.
 
 ## Search
 Quotes are retrieved by searching first for the correct author. This strives for robustness, because it allows to return a quote whether the input is the correct name of the author or not. At the same time, note that subsequent calls to WikiQuotes api have to be made to grab suggestions (see [here](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/wikiquotes/managers/api_manager.py#L20)).

@@ -5,6 +5,16 @@
 
 This library is intended to be a python API for wikiquotes (inspired by [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/)).
 
+## Funding
+
+<a href="https://github.com/sponsors/FranDepascuali">
+  <img align="right" width="150" alt="This library helped you? Consider sponsoring!" src=".github/funding-octocat.svg">
+</a>
+
+This module is provided **as is**, I work on it in my free time.
+
+If your company uses it in a production app, consider sponsoring this project 💰. You also can contact me for enterprise support, help with issues, prioritize bugfixes, feature requests, etc.
+
 ## Table of Contents
   * [Usage](#usage)
   * [Installation](#installation)
@@ -60,11 +70,11 @@ Anyway, the correct approach would be to try both and stick with the one that gi
 
 This project also gets to avoid fetching quotes included in about section. For example, if using [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/) and not this project:
 ```python
-import wikiquote 
+import wikiquote
 print(wikiquote.quotes('Ada Lovelace'))
 ```
 will fetch *"A large, coarse-skinned young woman but with something of my friend's features, particularly the mouth."*
-which wasn't said by Ada Lovelace (but said about her). 
+which wasn't said by Ada Lovelace (but said about her).
 
 While if you use this library, that quote and quotes about someone will not appear.
 ```python

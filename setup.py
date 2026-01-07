@@ -3,21 +3,8 @@
 # Learn more: https://github.com/kennethreitz/setup.py
 
 from setuptools import setup, find_packages
-import subprocess
 
-# TODO: Automate README generation
-# # Try to create an rst long_description from README.md
-# try:
-#     args = 'pandoc', '--to', 'rst', 'README.md'
-#     long_description = subprocess.check_output(args)
-#     long_description = long_description.decode()
-# except Exception as error:
-#     print('README.md conversion to reStructuredText failed. Error:')
-#     print(error)
-#     print('Setting long_description to None.')
-#     long_description = None
-
-with open('README.rst') as f:
+with open('README.md', encoding='utf-8') as f:
     readme = f.read()
 
 with open('LICENSE') as f:
@@ -31,6 +18,7 @@ setup(
     version = version,
     description = 'Wikiquotes python API',
     long_description = readme,
+    long_description_content_type = 'text/markdown',
     platforms='any',
     python_requires='>=3.6',
     classifiers=[

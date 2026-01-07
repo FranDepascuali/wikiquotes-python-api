@@ -4,6 +4,12 @@ from . import logging_manager
 from . import custom_exceptions
 from . import json_parser
 
+# User-Agent header required by Wikimedia API policy
+# https://meta.wikimedia.org/wiki/User-Agent_policy
+HEADERS = {
+    'User-Agent': 'wikiquotes/1.4 (https://github.com/FranDepascuali/wikiquotes-python-api)'
+}
+
 def request_quote_of_the_day_page(language):
     return _request_via_scrapping(language.quote_of_the_day_url, language)
 
@@ -45,7 +51,7 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
     set_value(parameters, 'list', list)
     set_value(parameters, 'srsearch', srsearch)
 
-    request = requests.get(base_url, params = parameters, allow_redirects = redirects)
+    request = requests.get(base_url, params = parameters, allow_redirects = redirects, headers = HEADERS)
 
     if format == "json":
         answer = request.json()
@@ -57,6 +63,6 @@ def _request_via_api(base_url, titles = None, action = None, prop = None, format
 
 # Use this if it can't be achieved by _request_via_api (because _request_via_api solves redirects automatically)
 def _request_via_scrapping(page, language):
-    request = requests.get(page)
+    request = requests.get(page, headers = HEADERS)
     # logging_manager.info("Requesting via scrapping: {}".format(page))
     return request.content

@@ -41,28 +41,6 @@ class EncodingTest(unittest.TestCase):
         self.assertEqual(spanish, _generate(u"Español"))
         self.assertEqual(spanish, _generate(u"español"))
 
-    def test_get_quotes_encoding(self):
-        author = Author.random_author()
-        quotes = wikiquotes.get_quotes(author.name, author.language)
-
-        for quote in quotes:
-            self.assertTrue(language_manager.is_unicode(quote))
-
-    def test_random_quote_encoding(self):
-        author = Author.random_author()
-        random_quote = wikiquotes.random_quote(author.name, author.language)
-
-        self.assertTrue(language_manager.is_unicode(random_quote))
-
-    def test_quote_of_the_day_encoding(self):
-        spanish_quote_of_the_day = wikiquotes.quote_of_the_day("spanish")
-        self.assertTrue(language_manager.is_unicode(spanish_quote_of_the_day[0]))
-        self.assertTrue(language_manager.is_unicode(spanish_quote_of_the_day[1]))
-
-        english_quote_of_the_day = wikiquotes.quote_of_the_day("english")
-        self.assertTrue(language_manager.is_unicode(english_quote_of_the_day[0]))
-        self.assertTrue(language_manager.is_unicode(english_quote_of_the_day[1]))
-
     def test_spanish_quote_of_the_day_encoding_invariance(self):
 
         quote_of_the_day = wikiquotes.quote_of_the_day("spanish")

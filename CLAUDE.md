@@ -79,14 +79,12 @@ This means `get_quotes("shakspare", "english")` makes ~4 API calls total.
 
 ## Testing System
 
-Tests use a unique parametrized approach:
+Tests use a parametrized approach with pytest:
 - Each author has a `.txt` file in `tests/authors/`
 - Format: Line 1 = author name/page suffix, Line 2 = language, Line 3 = empty, Lines 4+ = one quote per line
 - `Author.py` reads all `.txt` files and creates Author objects
-- `author_test.py` dynamically generates test cases for each author
+- `author_test.py` uses pytest's parametrization to generate test cases for each author
 - Tests verify: all quotes retrieved, no duplicates, random quote functionality
-
-Note: Cannot run with pytest directly; use `python tests/test_suite/author_test.py`
 
 ## Dependencies
 

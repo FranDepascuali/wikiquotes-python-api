@@ -4,18 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-A Python API library for retrieving quotes from WikiQuotes. Supports both Python 2.x and 3.x, with multi-language support (currently English and Spanish).
+A Python 3.6+ API library for retrieving quotes from WikiQuotes. Supports multi-language support (currently English and Spanish).
 
 ## Common Commands
 
 ### Testing
 ```bash
-# Run all tests using tox (tests both Python 2.7 and 3.6)
+# Run all tests using tox (tests Python 3.6+)
 tox
 
 # Run specific test file directly
-python tests/test_suite/author_test.py
-python tests/test_suite/encoding_test.py
+python3 tests/test_suite/author_test.py
+python3 tests/test_suite/encoding_test.py
 
 # Run tests with pytest
 pytest
@@ -38,7 +38,7 @@ All public API functions follow this pattern:
 2. Convert to language module via `language_manager.from_string()`
 3. Make API request via `api_manager`
 4. Parse HTML response via `HTMLManager`
-5. Return unicode strings regardless of Python version
+5. Return strings (Python 3 strings are unicode by default)
 
 ### Language System
 Languages are implemented as modules (not classes) in `wikiquotes/languages/`:
@@ -49,8 +49,7 @@ Languages are implemented as modules (not classes) in `wikiquotes/languages/`:
 ### Managers (wikiquotes/managers/)
 - `api_manager.py`: Makes requests to WikiQuotes API
 - `html_manager.py`: Parses HTML using BeautifulSoup, extracts quotes from list structures
-- `language_manager.py`: Converts language strings to language modules, handles unicode
-- `python_version_manager.py`: Python 2/3 compatibility checks
+- `language_manager.py`: Converts language strings to language modules
 - `custom_exceptions.py`: Custom exceptions (TitleNotFound, UnsupportedLanguageException)
 
 ### Quote Parsing Strategy
@@ -89,8 +88,11 @@ Tests use a unique parametrized approach:
 
 Note: Cannot run with pytest directly; use `python tests/test_suite/author_test.py`
 
-## Python 2/3 Compatibility
+## Dependencies
 
-- All output is unicode strings (use `language_manager.transform_to_unicode()`)
-- Python 2 encoding setup happens in `wikiquotes/__init__.py`
-- Use `python_version_manager.is_python_2()` / `is_python_3()` for version checks
+- **beautifulsoup4**: HTML parsing
+- **requests**: HTTP requests to WikiQuotes API
+- **lxml**: XML/HTML parser backend for BeautifulSoup
+- **unidecode**: Unicode normalization for language detection
+- **pytest**: Testing framework
+- **tox**: Multi-environment testing

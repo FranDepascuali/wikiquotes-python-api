@@ -1,7 +1,6 @@
-bs4
-requests
-pytest
-tox
-lxml
-unidecode
-slacker
+beautifulsoup4>=4.14.3
+requests>=2.32.5
+pytest>=9.0.2
+tox>=4.33.0
+lxml>=6.0.2
+unidecode>=1.4.0

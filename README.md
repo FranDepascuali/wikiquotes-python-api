@@ -1,4 +1,4 @@
-![Python](https://img.shields.io/badge/python-2.x%2F3.x-blue.svg)
+![Python](https://img.shields.io/badge/python-3.6+-blue.svg)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
 # wikiquotes-python-api
@@ -28,21 +28,21 @@ If your company uses it in a production app, consider sponsoring this project �
 >>> import wikiquotes
 
 >>> wikiquotes.search("gandi", "english")
-[u'Mahatma Gandhi', u'Indira Gandhi', u'Rahul Gandhi', u'Rajiv Gandhi', u'Arun Manilal Gandhi', u'Gandhi (film)', u'Anand Gandhi', u'Virchand Gandhi', u'Maneka Gandhi', u'Blindness']
+['Mahatma Gandhi', 'Indira Gandhi', 'Rahul Gandhi', 'Rajiv Gandhi', 'Arun Manilal Gandhi', 'Gandhi (film)', 'Anand Gandhi', 'Virchand Gandhi', 'Maneka Gandhi', 'Blindness']
 
 >>> wikiquotes.get_quotes('Hau Pei-tsun', "english")
-# [u"The slogans of 'countering back the mainland' created by Chiang Kai-shek and 'liberating Taiwan' by Mao Zedong several decades ago should be forgotten because none of them could be put into practice.",
-#  u'When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.',
-#  u'Taiwanese independence is a dead end.']
+# ["The slogans of 'countering back the mainland' created by Chiang Kai-shek and 'liberating Taiwan' by Mao Zedong several decades ago should be forgotten because none of them could be put into practice.",
+#  'When people on both sides of the Strait reach a consensus on their political system, unification will come to fruition naturally.',
+#  'Taiwanese independence is a dead end.']
 
 >>> wikiquotes.quote_of_the_day("english")
-# (u'Even after killing ninety nine tigers the Maharaja should beware of the hundredth.', u'Kalki Krishnamurthy')
+# ('Even after killing ninety nine tigers the Maharaja should beware of the hundredth.', 'Kalki Krishnamurthy')
 
 >>> wikiquotes.quote_of_the_day("spanish")
-# (u'Por San Ferm\xedn, el calor no tiene fin', u'Refr\xe1n espa\xf1ol')
+# ('Por San Fermín, el calor no tiene fin', 'Refrán español')
 
 >>> wikiquotes.random_quote("Aristotle", "english")
-# u'For the things we have to learn before we can do, we learn by doing.'
+# 'For the things we have to learn before we can do, we learn by doing.'
 
 >>> wikiquotes.supported_languages()
 # ['english', 'spanish']
@@ -58,13 +58,11 @@ At a first glance, I chose the second option and used that library. However, usa
 
 The main reasons for this decision were that:
 1. Quotes retrieved weren't all the quotes in wikiquotes API (tried with different authors).
-2. It doesn't work for python 2.x
 2. The code was too complex for what it was achieving. The choice in that project was to use urllib to retrieve the quotes, and lxml to parse the html.
 
 This project:
 1. Adds tests for retrieving all the quotes from several authors (Though this point is difficult to satisfy, because quotes don't respect a format for all authors).
-2. Works for python 2.x and 3.x
-3. Uses requests and BeautifulSoup, which abstract great part of the complexity which is present in [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
+2. Uses requests and BeautifulSoup, which abstract great part of the complexity which is present in [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
 
 Anyway, the correct approach would be to try both and stick with the one that gives you the best results.
 
@@ -92,17 +90,10 @@ Example:
 
 ## Output
 
-While in python 3.x str type = unicode, in python 2.x str type != unicode. Therefore (and to be consistent), all string output are unicode strings, independent of python's version.
-If you call any function from the API that have non-english characters, you will see some weird characters.
+All string output is in unicode (Python 3 strings natively support unicode). Non-ASCII characters are handled automatically:
 ```python
 >>> wikiquotes.random_quote("borges", "español")
-# u'\xabTodos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes\xbb.'
-```
-This is not incorrect, it is the underlying representation of the format of the string.
-You could encode the string in utf-8 and print it (or just print it and your python interpreter should convert it automatically).
-```python
->>> print(u'\xabTodos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes\xbb.'.encode('utf8'))
-# «Todos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes».
+# '«Todos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes».'
 ```
 
 ## Testing

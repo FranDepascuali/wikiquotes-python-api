@@ -18,6 +18,7 @@ If your company uses it in a production app, consider sponsoring this project ðŸ
 ## Table of Contents
   * [Usage](#usage)
   * [Installation](#installation)
+  * [Development](#development)
   * [Motivation](#motivation)
   * [Search](#search)
   * [Output](#output)
@@ -52,6 +53,44 @@ If your company uses it in a production app, consider sponsoring this project ðŸ
 ```sh
 pip install wikiquotes
 ```
+
+## Development
+
+To work on the project locally in development mode:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Install package in editable/development mode
+pip install -e .
+```
+
+The `-e` flag installs the package in editable mode, which means any changes you make to the source code will immediately be available without needing to reinstall the package.
+
+After installation, you can import and use it:
+
+```python
+import wikiquotes
+
+# Test it out
+quotes = wikiquotes.get_quotes("Albert Einstein", "english")
+print(quotes[0])
+```
+
+Run tests to verify everything works:
+
+```bash
+# Run all tests using tox (tests Python 3.6+)
+tox
+
+# Run tests with pytest
+pytest
+
+# Run specific test file directly
+python3 tests/test_suite/author_test.py
+```
+
 ## Motivation
 There seems to be two options for retrieving quotes from WikiQuotes using python: To implement it yourself or to use [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/).
 At a first glance, I chose the second option and used that library. However, usage and code inspection over [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/) lead me to choose the first approach and develop a library.

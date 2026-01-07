@@ -1,6 +1,6 @@
 beautifulsoup4>=4.14.3
 requests>=2.32.5
-pytest>=9.0.2
+pytest>=8.0.0
 tox>=4.33.0
 lxml>=6.0.2
 unidecode>=1.4.0

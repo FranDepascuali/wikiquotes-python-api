@@ -13,7 +13,7 @@ class HTMLManager:
             list_items = html_list.find_all('li')
 
             for li in list_items:
-                if not li is -1 and li:
+                 if li != -1 and li:
                     if li.ul:
                         li.ul.decompose()
 

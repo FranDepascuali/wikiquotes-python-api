@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wikiquotes"
-version = "1.5"
+version = "1.5.0"
 description = "Wikiquotes python API"
 readme = "README.md"
 requires-python = ">=3.10"

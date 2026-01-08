@@ -34,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Users can now call `logging.basicConfig()` after importing wikiquotes
 - Fixed bug in `html_manager.py` `is_title()` function that incorrectly compared Tag objects
 - Fixed bug in `logging_manager.py` `log_method_call()` decorator that called the task function twice
+- Fixed flaky `quote_of_the_day` encoding tests that failed when quote content changed daily
+  - Tests now verify encoding invariance without relying on specific quote content
 
 ### Removed
 - Dropped support for end-of-life Python versions 3.6, 3.7, 3.8, and 3.9

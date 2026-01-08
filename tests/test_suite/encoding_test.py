@@ -20,13 +20,6 @@ class EncodingTest(unittest.TestCase):
         self.assertEqual(english, _generate("Ingles"))
         self.assertEqual(english, _generate("ingles"))
 
-        self.assertEqual(english, _generate(u"English"))
-        self.assertEqual(english, _generate(u"english"))
-        self.assertEqual(english, _generate(u"en"))
-        self.assertEqual(english, _generate(u"Inglés"))
-        self.assertEqual(english, _generate(u"Ingles"))
-        self.assertEqual(english, _generate(u"ingles"))
-
     def test_spanish_encoding(self):
 
         self.assertEqual(spanish, _generate("Spanish"))
@@ -35,45 +28,58 @@ class EncodingTest(unittest.TestCase):
         self.assertEqual(spanish, _generate("Español"))
         self.assertEqual(spanish, _generate("español"))
 
-        self.assertEqual(spanish, _generate(u"Spanish"))
-        self.assertEqual(spanish, _generate(u"spanish"))
-        self.assertEqual(spanish, _generate(u"es"))
-        self.assertEqual(spanish, _generate(u"Español"))
-        self.assertEqual(spanish, _generate(u"español"))
-
     def test_spanish_quote_of_the_day_encoding_invariance(self):
+        # Test that different language string formats return the same result
+        # Note: We can't test exact quote content as it changes daily
 
-        quote_of_the_day = wikiquotes.quote_of_the_day("spanish")
+        # Get quote of the day with different language string formats
+        results = [
+            _qotd("Spanish"),
+            _qotd("spanish"),
+            _qotd("es"),
+            _qotd("Español"),
+            _qotd("español")
+        ]
 
-        self.assertEqual(quote_of_the_day, _qotd("Spanish"))
-        self.assertEqual(quote_of_the_day, _qotd("spanish"))
-        self.assertEqual(quote_of_the_day, _qotd("es"))
-        self.assertEqual(quote_of_the_day, _qotd("Español"))
-        self.assertEqual(quote_of_the_day, _qotd("español"))
+        # All results should be identical (same quote, same author)
+        first_result = results[0]
+        for result in results:
+            self.assertEqual(result, first_result)
 
-        self.assertEqual(quote_of_the_day, _qotd(u"Spanish"))
-        self.assertEqual(quote_of_the_day, _qotd(u"spanish"))
-        self.assertEqual(quote_of_the_day, _qotd(u"es"))
-        self.assertEqual(quote_of_the_day, _qotd(u"Español"))
-        self.assertEqual(quote_of_the_day, _qotd(u"español"))
+        # Verify result structure (tuple with 2 non-empty strings)
+        self.assertIsInstance(first_result, tuple)
+        self.assertEqual(len(first_result), 2)
+        self.assertIsInstance(first_result[0], str)  # quote
+        self.assertIsInstance(first_result[1], str)  # author
+        self.assertGreater(len(first_result[0]), 0)
+        self.assertGreater(len(first_result[1]), 0)
 
     def test_english_quote_of_the_day_encoding_invariance(self):
+        # Test that different language string formats return the same result
+        # Note: We can't test exact quote content as it changes daily
 
-        quote_of_the_day = wikiquotes.quote_of_the_day("english")
+        # Get quote of the day with different language string formats
+        results = [
+            _qotd("English"),
+            _qotd("english"),
+            _qotd("en"),
+            _qotd("Inglés"),
+            _qotd("Ingles"),
+            _qotd("ingles")
+        ]
 
-        self.assertEqual(quote_of_the_day, _qotd("English"))
-        self.assertEqual(quote_of_the_day, _qotd("english"))
-        self.assertEqual(quote_of_the_day, _qotd("en"))
-        self.assertEqual(quote_of_the_day, _qotd("Inglés"))
-        self.assertEqual(quote_of_the_day, _qotd("Ingles"))
-        self.assertEqual(quote_of_the_day, _qotd("ingles"))
+        # All results should be identical (same quote, same author)
+        first_result = results[0]
+        for result in results:
+            self.assertEqual(result, first_result)
 
-        self.assertEqual(quote_of_the_day, _qotd(u"English"))
-        self.assertEqual(quote_of_the_day, _qotd(u"english"))
-        self.assertEqual(quote_of_the_day, _qotd(u"en"))
-        self.assertEqual(quote_of_the_day, _qotd(u"Inglés"))
-        self.assertEqual(quote_of_the_day, _qotd(u"Ingles"))
-        self.assertEqual(quote_of_the_day, _qotd(u"ingles"))
+        # Verify result structure (tuple with 2 non-empty strings)
+        self.assertIsInstance(first_result, tuple)
+        self.assertEqual(len(first_result), 2)
+        self.assertIsInstance(first_result[0], str)  # quote
+        self.assertIsInstance(first_result[1], str)  # author
+        self.assertGreater(len(first_result[0]), 0)
+        self.assertGreater(len(first_result[1]), 0)
 
 def _generate(string):
     return language_manager.from_string(string)

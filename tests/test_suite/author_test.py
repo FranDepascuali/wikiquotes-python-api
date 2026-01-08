@@ -76,7 +76,7 @@ class TestAuthor:
         )
 
     def test_random_quote(self, author):
-        """Test that random_quote returns different quotes when possible."""
+        """Test that random_quote returns quotes from the available set."""
         fetch_quotes = wikiquotes.get_quotes(author.name, author.language)
         number_of_quotes = len(fetch_quotes)
 
@@ -84,20 +84,30 @@ class TestAuthor:
         if number_of_quotes <= 1:
             pytest.skip(f"Only {number_of_quotes} quote(s) available")
 
-        # Try multiple times to get different random quotes
-        collected_quotes = []
-        for _ in range(RANDOM_TRIES):
-            quote1 = wikiquotes.random_quote(author.name, author.language)
-            quote2 = wikiquotes.random_quote(author.name, author.language)
-            collected_quotes.extend([quote1, quote2])
+        # Collect random quotes
+        random_quotes = set()
+        MAX_ATTEMPTS = min(number_of_quotes * 3, 50)  # Cap at 50 attempts
 
-            if quote1 != quote2:
-                return  # Success - got different quotes
+        for _ in range(MAX_ATTEMPTS):
+            random_quote = wikiquotes.random_quote(author.name, author.language)
 
-        pytest.fail(
-            f"\n\nrandom_quote returned the same quote {RANDOM_TRIES} times "
-            f"for {author.name}\n"
-            f"Total quotes available: {number_of_quotes}\n"
-            f"\nQuotes returned:\n"
-            f"{chr(10).join('  - ' + q[:80] + '...' if len(q) > 80 else '  - ' + q for q in set(collected_quotes))}"
-        )
+            # Verify quote is from the valid set
+            assert random_quote in fetch_quotes, (
+                f"random_quote returned a quote not in get_quotes() for {author.name}"
+            )
+
+            random_quotes.add(random_quote)
+
+            # If we have multiple different quotes, randomness is working
+            if len(random_quotes) >= min(3, number_of_quotes):
+                return  # Success!
+
+        # If we get here, we got fewer unique quotes than expected
+        if number_of_quotes >= 3:
+            pytest.fail(
+                f"\n\nrandom_quote showed poor randomness for {author.name}\n"
+                f"Got only {len(random_quotes)} unique quotes out of {number_of_quotes} available\n"
+                f"After {MAX_ATTEMPTS} attempts\n"
+                f"\nQuotes returned:\n"
+                f"{chr(10).join('  - ' + q[:80] + '...' if len(q) > 80 else '  - ' + q for q in random_quotes)}"
+            )

@@ -1,7 +1,6 @@
 import random
 import os
 
-from .managers import logging_manager
 from .managers import api_manager
 from .managers import html_manager
 from .managers import language_manager

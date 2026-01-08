@@ -23,11 +23,8 @@ pytest
 
 ### Installation
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Install package in development mode
-pip install -e .
+# Install package in development mode (includes all dependencies)
+pip install -e ".[dev]"
 ```
 
 ## Architecture

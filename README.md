@@ -16,13 +16,16 @@ This module is provided **as is**, I work on it in my free time.
 If your company uses it in a production app, consider sponsoring this project 💰. You also can contact me for enterprise support, help with issues, prioritize bugfixes, feature requests, etc.
 
 ## Table of Contents
-  * [Usage](#usage)
-  * [Installation](#installation)
-  * [Development](#development)
-  * [Motivation](#motivation)
-  * [Search](#search)
-  * [Output](#output)
-  * [Testing](#testing)
+- [wikiquotes-python-api](#wikiquotes-python-api)
+  - [Funding](#funding)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Motivation](#motivation)
+  - [Search](#search)
+  - [Output](#output)
+  - [Testing](#testing)
 
 ## Usage
 ```python
@@ -59,11 +62,8 @@ pip install wikiquotes
 To work on the project locally in development mode:
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Install package in editable/development mode
-pip install -e .
+# Install package in editable/development mode (includes all dependencies)
+pip install -e ".[dev]"
 ```
 
 The `-e` flag installs the package in editable mode, which means any changes you make to the source code will immediately be available without needing to reinstall the package.

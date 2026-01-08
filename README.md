@@ -5,27 +5,30 @@
 
 This library is intended to be a python API for wikiquotes (inspired by [python-wikiquotes](https://github.com/federicotdn/python-wikiquotes/)).
 
-## Funding
+## Support This Project
 
 <a href="https://github.com/sponsors/FranDepascuali">
   <img align="right" width="150" alt="This library helped you? Consider sponsoring!" src=".github/funding-octocat.svg">
 </a>
 
-This module is provided **as is**, I work on it in my free time.
+This module is provided **as is**, and developed in my free time.
 
-If your company uses it in a production app, consider sponsoring this project 💰. You also can contact me for enterprise support, help with issues, prioritize bugfixes, feature requests, etc.
+**If this library helped you**, please consider [sponsoring this project](https://github.com/sponsors/FranDepascuali) 💰. Your support helps maintain and improve this library.
+
+**For companies**: If you use this in production, sponsorship provides enterprise support, priority bug fixes, and feature requests. [Contact me](https://github.com/sponsors/FranDepascuali) for details.
 
 ## Table of Contents
-- [wikiquotes-python-api](#wikiquotes-python-api)
-  - [Funding](#funding)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [Installation](#installation)
-  - [Development](#development)
-  - [Motivation](#motivation)
+- [Usage](#usage)
+- [Installation](#installation)
+- [Features](#features)
+- [Development](#development)
+  - [Testing](#testing)
+  - [Releasing New Versions](#releasing-new-versions)
+- [How It Works](#how-it-works)
   - [Search](#search)
   - [Output](#output)
-  - [Testing](#testing)
+- [Motivation](#motivation)
+- [Support This Project](#support-this-project)
 
 ## Usage
 ```python
@@ -57,6 +60,20 @@ If your company uses it in a production app, consider sponsoring this project �
 pip install wikiquotes
 ```
 
+## Features
+
+- 🌍 **Multi-language support**: Currently supports English and Spanish
+- 🔍 **Smart search**: Handles typos and name variations (e.g., "shakspare" → "Shakespeare")
+- 📚 **Multiple functions**:
+  - `search()` - Find authors by name
+  - `get_quotes()` - Get all quotes from an author
+  - `random_quote()` - Get a random quote from an author
+  - `quote_of_the_day()` - Get the quote of the day
+  - `supported_languages()` - List available languages
+- ✅ **Clean data**: Filters out quotes *about* the person (not *by* them)
+- 🐍 **Modern Python**: Supports Python 3.10+
+- ✨ **Type-friendly**: Clean API with predictable return types
+
 ## Development
 
 To work on the project locally in development mode:
@@ -78,6 +95,8 @@ quotes = wikiquotes.get_quotes("Albert Einstein", "english")
 print(quotes[0])
 ```
 
+### Testing
+
 Run tests to verify everything works:
 
 ```bash
@@ -89,6 +108,77 @@ pytest
 
 # Run specific test file directly
 python3 tests/test_suite/author_test.py
+```
+
+The approach for testing uses parametrized tests. Each author has a `.txt` file in `tests/authors/` with their name, language, and expected quotes. This allows easy addition of new test cases. See [author_test.py](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/tests/test_suite/author_test.py) for details.
+
+### Releasing New Versions
+
+To release a new version:
+
+1. **Update version numbers**:
+   ```bash
+   # Update version in both files:
+   # - pyproject.toml (line 7)
+   # - wikiquotes/__init__.py (__version__)
+   ```
+
+2. **Update CHANGELOG.md**:
+   ```bash
+   # Add new version section with changes
+   # Follow Keep a Changelog format
+   ```
+
+3. **Run tests**:
+   ```bash
+   pytest  # Ensure all tests pass
+   ```
+
+4. **Build the package**:
+   ```bash
+   python -m build
+   ```
+
+5. **Create git tag**:
+   ```bash
+   git add .
+   git commit -m "Release version X.Y.Z"
+   git tag -a vX.Y.Z -m "Version X.Y.Z"
+   git push origin master --tags
+   ```
+
+6. **Upload to PyPI**:
+   ```bash
+   python -m twine upload dist/*
+   ```
+
+7. **Create GitHub Release**:
+   - Go to [Releases](https://github.com/FranDepascuali/wikiquotes-python-api/releases)
+   - Click "Create a new release"
+   - Select the tag you just created
+   - Copy content from CHANGELOG.md
+   - Publish release
+
+## How It Works
+
+### Search
+
+Quotes are retrieved by searching first for the correct author. This provides robustness, allowing the library to return quotes even if the input isn't the exact author name. Note that this requires multiple API calls to WikiQuotes to fetch suggestions (see [api_manager.py](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/wikiquotes/managers/api_manager.py)).
+
+**Example flow**:
+```
+"shakspare" → API search → "shakespeare" → suggestions:
+['William Shakespeare', 'Last words in Shakespeare', 'Shakespeare in Love', ...]
+→ get_quotes ≈ 4 API calls total
+```
+
+### Output
+
+All string output is unicode (Python 3 strings natively support unicode). Non-ASCII characters are handled automatically:
+
+```python
+>>> wikiquotes.random_quote("borges", "español")
+# '«Todos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes».'
 ```
 
 ## Motivation
@@ -116,32 +206,29 @@ which wasn't said by Ada Lovelace (but said about her).
 While if you use this library, that quote and quotes about someone will not appear.
 ```python
 import wikiquotes
-print(wikiquotes.get_quotes('Ada Lovelace', 'english'))"
+print(wikiquotes.get_quotes('Ada Lovelace', 'english'))
 ```
 *"A large, coarse-skinned young woman but with something of my friend's features, particularly the mouth."* doesn't appear because it wasn't said by Ada Lovelace.
 
-## Search
-Quotes are retrieved by searching first for the correct author. This strives for robustness, because it allows to return a quote whether the input is the correct name of the author or not. At the same time, note that subsequent calls to WikiQuotes api have to be made to grab suggestions (see [here](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/wikiquotes/managers/api_manager.py#L20)).
+## Contributing
 
-Example:
-"shakspare" -> "shakespeare" -> ['William Shakespeare', 'Last words in Shakespeare', 'Shakespeare in Love', ...]
--> get_quotes = 4 calls.
+Contributions are welcome! Here are some ways you can contribute:
 
-## Output
+- 🌍 Add support for new languages
+- 🧪 Add test cases for more authors
+- 🐛 Report bugs or issues
+- 💡 Suggest new features
 
-All string output is in unicode (Python 3 strings natively support unicode). Non-ASCII characters are handled automatically:
-```python
->>> wikiquotes.random_quote("borges", "español")
-# '«Todos caminamos hacia el anonimato, solo que los mediocres llegan un poco antes».'
-```
+To add a new author test:
+1. Create a `.txt` file in `tests/authors/`
+2. Format:
+   - Line 1: Author's name (or WikiQuotes page suffix)
+   - Line 2: Language
+   - Line 3: Empty
+   - Lines 4+: One quote per line
 
-## Testing
-The approach for testing changed: at a first glance, testing was done by manually adding the code to test each author.
-After that, I realized that the structure was the same for every author: We need the name, the language and the quotes. Using some *black* magic for parametrizing tests, I could extract all the logic to code and have a text file for each author. (See [author_test](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/tests/test_suite/author_test.py) for more info.)
+See [dijkstra.txt](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/tests/authors/dijkstra.txt) as an example.
 
-The way of testing right now is to add a txt file of the author to test's [authors](https://github.com/FranDepascuali/wikiquotes-python-api/tree/master/tests/authors). For example, [here](https://github.com/FranDepascuali/wikiquotes-python-api/blob/master/tests/authors/dijkstra.txt) is the test for Dijkstra quotes in english.
-Adding a new author is a txt file for the author (the name is irrelevant, but should be the author name) and respecting the following format.
-1. First line: Author's name (or the suffix of the wikiquotes page, because sometimes wikipedia has ambiguate redirections if author name is used ).
-2. Second line: language.
-3. Third line: empty.
-4. Following lines should contain one quote per line.
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.

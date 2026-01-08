@@ -44,6 +44,7 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+.pytest_cache/
 nosetests.xml
 coverage.xml
 *.cover
@@ -105,3 +106,6 @@ ENV/
 
 *.log
 .DS_Store
+
+# Project-specific
+seed.txt

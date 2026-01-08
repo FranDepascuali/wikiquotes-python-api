@@ -4,19 +4,19 @@ import shutil
 
 def ensure_file_exists(file_path):
     if not file_exists(file_path):
-        raise IOError('File does not exist: %s' % file_path)
+        raise IOError(f'File does not exist: {file_path}')
 
 def ensure_directory_exists(directory_path):
     if not directory_exists(directory_path):
-        raise IOError('Directory does not exist: %s' % directory_path)
+        raise IOError(f'Directory does not exist: {directory_path}')
 
 def ensure_file_not_exists(file_path):
     if file_exists(file_path):
-        raise IOError('File already exist: %s' % file_path)
+        raise IOError(f'File already exist: {file_path}')
 
 def ensure_directory_not_exists(directory_path):
     if directory_exists(directory_path):
-        raise IOError('Directory already exist: %s' % directory_path)
+        raise IOError(f'Directory already exist: {directory_path}')
 
 def file_exists(file_path):
     return os.path.exists(file_path) and os.path.isfile(file_path)

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wikiquotes"
+version = "1.4"
+description = "Wikiquotes python API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Francisco Depascuali", email = "francisco.depascuali@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "beautifulsoup4>=4.9.0",
+    "requests>=2.25.0",
+    "lxml>=4.6.0",
+    "unidecode>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "tox>=4.33.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/FranDepascuali/wikiquotes-python-api"
+Repository = "https://github.com/FranDepascuali/wikiquotes-python-api"
+"Bug Tracker" = "https://github.com/FranDepascuali/wikiquotes-python-api/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["*_test.py"]

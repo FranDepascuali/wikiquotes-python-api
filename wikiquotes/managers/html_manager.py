@@ -59,7 +59,7 @@ class HTMLManager:
             non_quotes_section.decompose()
 
 def is_title(html_element):
-    return isinstance(html_element, Tag) and html_element in _titles
+    return isinstance(html_element, Tag) and html_element.name in _titles
 
 def find_all_titles(html):
     return html.find_all(_titles)

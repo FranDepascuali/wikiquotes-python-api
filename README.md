@@ -1,4 +1,4 @@
-![Python](https://img.shields.io/badge/python-3.6+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
 # wikiquotes-python-api
@@ -81,7 +81,7 @@ print(quotes[0])
 Run tests to verify everything works:
 
 ```bash
-# Run all tests using tox (tests Python 3.6+)
+# Run all tests using tox (tests Python 3.10+)
 tox
 
 # Run tests with pytest

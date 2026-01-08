@@ -62,7 +62,7 @@ def is_title(html_element):
     return isinstance(html_element, Tag) and html_element in _titles
 
 def find_all_titles(html):
-    return html.findAll(_titles)
+    return html.find_all(_titles)
 
 def extract_text_from_list(html_list):
     return map(lambda li_quote: li_quote.text.strip(), html_list.find_all("li"))

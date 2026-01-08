@@ -1,5 +1,6 @@
 import pytest
 import wikiquotes
+import random
 from tests.authors.Author import fetch_all_authors
 
 RANDOM_TRIES = 3
@@ -79,6 +80,10 @@ class TestAuthor:
         """Test that random_quote returns quotes from the available set."""
         fetch_quotes = wikiquotes.get_quotes(author.name, author.language)
         number_of_quotes = len(fetch_quotes)
+
+        # Set seed for deterministic testing
+        random.seed(12345)
+
 
         # Skip test if only one quote
         if number_of_quotes <= 1:

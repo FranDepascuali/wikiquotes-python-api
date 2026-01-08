@@ -18,17 +18,21 @@ This module is provided **as is**, and developed in my free time.
 **For companies**: If you use this in production, sponsorship provides enterprise support, priority bug fixes, and feature requests. [Contact me](https://github.com/sponsors/FranDepascuali) for details.
 
 ## Table of Contents
-- [Usage](#usage)
-- [Installation](#installation)
-- [Features](#features)
-- [Development](#development)
-  - [Testing](#testing)
-  - [Releasing New Versions](#releasing-new-versions)
-- [How It Works](#how-it-works)
-  - [Search](#search)
-  - [Output](#output)
-- [Motivation](#motivation)
-- [Support This Project](#support-this-project)
+- [wikiquotes-python-api](#wikiquotes-python-api)
+  - [Support This Project](#support-this-project)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [Installation](#installation)
+  - [Features](#features)
+  - [Development](#development)
+    - [Testing](#testing)
+    - [Releasing New Versions](#releasing-new-versions)
+  - [How It Works](#how-it-works)
+    - [Search](#search)
+    - [Output](#output)
+  - [Motivation](#motivation)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Usage
 ```python
@@ -116,11 +120,9 @@ The approach for testing uses parametrized tests. Each author has a `.txt` file 
 
 To release a new version:
 
-1. **Update version numbers**:
+1. **Update version number**:
    ```bash
-   # Update version in both files:
-   # - pyproject.toml (line 7)
-   # - wikiquotes/__init__.py (__version__)
+   # Update version in pyproject.toml (line 7)
    ```
 
 2. **Update CHANGELOG.md**:

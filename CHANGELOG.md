@@ -10,8 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Modern `pyproject.toml` for PEP 517/518 compliant packaging
 - GitHub Actions CI/CD workflow for automated testing across Python 3.10-3.13
-- `__version__` attribute in `__init__.py` for programmatic version access
+- `__version__` attribute in `__init__.py` that reads from package metadata (single source of truth)
 - `.pytest_cache/` to `.gitignore`
+- Comprehensive release instructions in README
+- Features section in README highlighting key capabilities
+- Contributing section in README
 
 ### Changed
 - **BREAKING**: Minimum Python version increased from 3.6 to 3.10
@@ -21,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrated from `%` string formatting to f-strings in `file_manager.py`
 - Standardized code formatting in `setup.py` (before removal)
 - Updated tox configuration to test Python 3.10-3.13
+- Version now maintained only in `pyproject.toml` (single source of truth)
+- Improved sponsorship section in README to be more inclusive
+- Reorganized README with better structure and navigation
 
 ### Fixed
 - **Critical**: Fixed logging configuration that prevented users from configuring their own logging

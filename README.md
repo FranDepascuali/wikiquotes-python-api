@@ -1,4 +1,5 @@
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+[![Tests](https://github.com/FranDepascuali/wikiquotes-python-api/actions/workflows/tests.yml/badge.svg)](https://github.com/FranDepascuali/wikiquotes-python-api/actions/workflows/tests.yml)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
 # wikiquotes-python-api

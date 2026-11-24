@@ -1,4 +1,5 @@
 import requests
+from urllib.parse import quote
 
 from . import logging_manager
 from . import custom_exceptions
@@ -19,6 +20,14 @@ def request_quotes_page(title, language):
         raise custom_exceptions.PageNotFoundException()
 
     return json_parser.quotes_from_json(answer)
+
+def request_quotes_page_via_html(title, language):
+    # Some languages need the fully rendered article page (e.g. French), because the
+    # API "extracts" format strips the markup their parser relies on. We build the
+    # article URL from the language base_url (which points to .../w/api.php).
+    root = language.base_url.rsplit("/w/api.php", 1)[0]
+    page = root + "/wiki/" + quote(title)
+    return _request_via_scrapping(page, language)
 
 def request_titles(title, language):
     answer = None

@@ -26,24 +26,37 @@ def get_quotes(author, raw_language):
     language = language_manager.from_string(raw_language)
 
     suggested_author = search(author, raw_language)[0]
-    quotes_page = api_manager.request_quotes_page(suggested_author, language)
+
+    # Some languages (e.g. French) don't use the generic <ul><li> quote layout and
+    # provide their own extraction function in their language module. They also need
+    # the fully rendered page, because the API "extracts" format strips the markup
+    # (e.g. <div class="citation">) that their parser relies on.
+    quotes_parser = getattr(language, "quotes_parser", None)
+    if quotes_parser is not None:
+        quotes_page = api_manager.request_quotes_page_via_html(suggested_author, language)
+    else:
+        quotes_page = api_manager.request_quotes_page(suggested_author, language)
+
     web_page_manager = html_manager.HTMLManager(quotes_page, language)
 
     web_page_manager.delete_sections(language.non_quote_sections)
 
-    html_lists = web_page_manager.find_all_lists()
-    quotes = []
+    if quotes_parser is not None:
+        quotes = quotes_parser(web_page_manager)
+    else:
+        html_lists = web_page_manager.find_all_lists()
+        quotes = []
 
-    # Almost every quote structure is:
-    # <ul>
-    #   <li> Quote text </li>
-    #   <ul>
-    #       <li> author or some reference</li>
-    #   </ul>
-    # </ul>
-    for html_list in html_lists:
-        web_page_manager.remove_sublists(html_list)
-        quotes.extend(html_manager.extract_text_from_list(html_list))
+        # Almost every quote structure is:
+        # <ul>
+        #   <li> Quote text </li>
+        #   <ul>
+        #       <li> author or some reference</li>
+        #   </ul>
+        # </ul>
+        for html_list in html_lists:
+            web_page_manager.remove_sublists(html_list)
+            quotes.extend(html_manager.extract_text_from_list(html_list))
 
     answer = list(map(language_manager.transform_to_unicode, quotes))
 
@@ -75,5 +88,5 @@ def random_quote(author, raw_language):
 
 def supported_languages():
     # logging_manager.info("API intent: {}".format("supported_languages"))
-    languages = ["english", "spanish"]
+    languages = ["english", "spanish", "french"]
     return languages

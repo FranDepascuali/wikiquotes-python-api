@@ -3,6 +3,7 @@ import unidecode
 
 from ..languages import spanish
 from ..languages import english
+from ..languages import french
 from . import custom_exceptions
 
 def from_string(raw_language):
@@ -11,6 +12,8 @@ def from_string(raw_language):
         return english
     elif lowered == "es" or lowered == "spanish" or lowered == "espanol":
         return spanish
+    elif lowered == "fr" or lowered == "french" or lowered == "francais":
+        return french
 
     raise custom_exceptions.UnsupportedLanguageException()
 

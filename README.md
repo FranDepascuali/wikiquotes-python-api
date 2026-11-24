@@ -53,11 +53,17 @@ This module is provided **as is**, and developed in my free time.
 >>> wikiquotes.quote_of_the_day("spanish")
 # ('Por San Fermín, el calor no tiene fin', 'Refrán español')
 
+>>> wikiquotes.quote_of_the_day("français")
+# ("Nous sommes tout près de la mort...", 'Andrea Dworkin')
+
 >>> wikiquotes.random_quote("Aristotle", "english")
 # 'For the things we have to learn before we can do, we learn by doing.'
 
+>>> wikiquotes.get_quotes("Victor Hugo", "français")
+# ["Toujours lui ! lui partout ! Ou brûlante ou glacée, Son image sans cesse ébranle ma pensée.", ...]
+
 >>> wikiquotes.supported_languages()
-# ['english', 'spanish']
+# ['english', 'spanish', 'french']
 ```
 
 ## Installation
@@ -67,7 +73,7 @@ pip install wikiquotes
 
 ## Features
 
-- 🌍 **Multi-language support**: Currently supports English and Spanish
+- 🌍 **Multi-language support**: Currently supports English, Spanish and French
 - 🔍 **Smart search**: Handles typos and name variations (e.g., "shakspare" → "Shakespeare")
 - 📚 **Multiple functions**:
   - `search()` - Find authors by name
@@ -217,7 +223,7 @@ print(wikiquotes.get_quotes('Ada Lovelace', 'english'))
 
 Contributions are welcome! Here are some ways you can contribute:
 
-- 🌍 Add support for new languages
+- 🌍 Add support for new languages (e.g. French was added recently — see `wikiquotes/languages/french.py` for a reference implementation)
 - 🧪 Add test cases for more authors
 - 🐛 Report bugs or issues
 - 💡 Suggest new features

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-A Python 3.6+ API library for retrieving quotes from WikiQuotes. Supports multi-language support (currently English and Spanish).
+A Python 3.10+ API library for retrieving quotes from WikiQuotes. Supports multi-language support (currently English, Spanish and French).
 
 ## Common Commands
 
@@ -41,6 +41,7 @@ All public API functions follow this pattern:
 Languages are implemented as modules (not classes) in `wikiquotes/languages/`:
 - Each language module defines: `base_url`, `quote_of_the_day_url`, `quote_of_the_day_parser()`, `non_quote_sections`
 - `non_quote_sections` are section titles to exclude when parsing (e.g., "about", "misattributed")
+- A language module MAY also define `quotes_parser(web_page_manager)` to override the generic quote extraction (see Quote Parsing Strategy below)
 - Language detection in `language_manager.py` normalizes input (strips accents, lowercases)
 
 ### Managers (wikiquotes/managers/)
@@ -59,6 +60,8 @@ Quotes are extracted from HTML list structures:
 ```
 The parser removes nested `<ul>` sublists (which contain metadata) and extracts only top-level `<li>` elements.
 
+This generic strategy works for English/Spanish. **French uses a different structure**: quotes live in `<div class="citation">` (the API `extracts` format strips this markup), so `french.py` defines a `quotes_parser()` and `get_quotes()` fetches the **fully rendered page** via `api_manager.request_quotes_page_via_html()` instead of `extracts`. `get_quotes()` checks `getattr(language, "quotes_parser", None)` to decide which path to use.
+
 ### Search Flow
 When fetching quotes, the API first searches for the author name to handle typos/variations:
 1. User input → `api_manager.request_titles()` → suggestion list
@@ -73,6 +76,7 @@ This means `get_quotes("shakspare", "english")` makes ~4 API calls total.
 1. Create new language module in `wikiquotes/languages/<language>.py` with required fields
 2. Add language detection logic to `language_manager.from_string()`
 3. Update `supported_languages()` in `wikiquotes_api.py`
+4. If the language's pages don't use the generic `<ul><li>` quote layout, also add a `quotes_parser()` to the language module (see `french.py`)
 
 ## Testing System
 

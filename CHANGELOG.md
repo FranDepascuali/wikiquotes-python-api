@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- 🇫🇷 French language support (`wikiquotes/languages/french.py`)
+- `get_quotes()` now supports per-language quote parsers: French uses `quotes_parser()` and fetches the fully rendered page (via `api_manager.request_quotes_page_via_html()`) because French pages store quotes in `<div class="citation">` (stripped by the API `extracts` format), unlike the generic `<ul><li>` layout used by English/Spanish
+- French `quote_of_the_day()` parser (reads the `Modèle:Citation_du_jour` blockquote)
+- `tests/authors/victor_hugo.txt` French parametrized test case
+
+### Changed
+- `supported_languages()` now returns `['english', 'spanish', 'french']`
+- `language_manager.from_string()` recognizes `fr`, `french`, `français`/`francais`
+
 ## [1.5.0] - 2026-01-07
 
 ### Added
